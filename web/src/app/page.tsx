@@ -154,9 +154,11 @@ const Home = () => {
       {/* 3. Best Sellers */}
       <section className="section-container container mx-auto px-4 py-24 bg-gray-50 rounded-xl" >
         <h2 className="section-headline text-3xl font-bold mb-12 text-black text-center" >What Parents Are Loving</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center" >
+        <div className="flex flex-wrap justify-center gap-8" >
           {bestSellers.map((product) => (
-            <ProductCard key={product.ProductID} product={product} /> // Reusing ProductCard instead of custom mini card for consistency
+            <div key={product.ProductID} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] flex justify-center">
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
       </section>
