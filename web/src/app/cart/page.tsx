@@ -15,7 +15,7 @@ const BagIcon = () => (
 export default function CartPage() {
     const { cartItems, total, updateQuantity, removeFromCart } = useCart();
 
-    const handleQuantityChange = (id, newQty) => {
+    const handleQuantityChange = (id: string, newQty: number) => {
         if (newQty < 1) return;
         updateQuantity(id, newQty);
     };

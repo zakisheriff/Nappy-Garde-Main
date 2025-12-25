@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
 import './Checkout.css';
@@ -15,16 +15,18 @@ export default function CheckoutPage() {
         address: '',
     });
 
-    if (cartItems.length === 0) {
-        router.push('/cart');
-        return null;
-    }
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            router.push('/cart');
+        }
+    }, [cartItems, router]);
 
-    const handleChange = (e) => {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
