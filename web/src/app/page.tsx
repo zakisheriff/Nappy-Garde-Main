@@ -180,15 +180,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 13. Newsletter */}
-      <section className="section-container container mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl font-bold mb-4">Join the Nappy Garde Family</h2>
-        <p className="text-gray-400 mb-8 text-lg">Get expert parenting tips and exclusive offers.</p>
-        <div className="max-w-md mx-auto flex gap-2">
-          <input type="email" placeholder="Email address" className="flex-1 rounded-full border border-gray-600 bg-gray-800 px-6 py-3 text-white focus:outline-none focus:border-blue-500" />
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors">Sign Up</button>
-        </div>
-      </section>
+
 
 
       {/* Size Calculator Modal */}

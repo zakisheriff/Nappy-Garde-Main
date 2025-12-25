@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
 import "./globals.css";
 import "./focus-fix.css";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
+import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { Toaster } from 'sonner';
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Nappy Garde",

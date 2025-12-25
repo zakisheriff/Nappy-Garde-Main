@@ -43,7 +43,7 @@ const Navbar = () => {
     return (
         <>
             <nav className={`navbar ${mobileMenuOpen ? 'menu-open' : ''} ${searchOpen ? 'search-active' : ''}`} role="navigation" aria-label="Main navigation">
-                <div className="navbar-container">
+                <div className="navbar-container h-[72px] px-8 max-w-[1440px] mx-auto flex items-center justify-between">
                     {/* Default Navbar Content (Hidden when search is open) */}
                     <div className={`nav-content-wrapper ${searchOpen ? 'search-mode-hidden' : ''}`}>
                         {/* Logo */}
@@ -52,18 +52,18 @@ const Navbar = () => {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <div className="navbar-links search-hide">
-                            <Link href="/" className="nav-link">Home</Link>
-                            <Link href="/products?category=Diapers" className="nav-link">Diapers & Pants</Link>
-                            <Link href="/products?category=Wipes" className="nav-link">Wet Wipes</Link>
-                            <Link href="/products?category=Skincare" className="nav-link">Bath & Skincare</Link>
-                            <Link href="/products?category=Clothing" className="nav-link">Clothing</Link>
-                            <Link href="/products?category=Toys" className="nav-link">Toys</Link>
-                            <Link href="/products?category=Health" className="nav-link">Health</Link>
+                        <div className="navbar-links search-hide flex gap-12 items-center justify-center flex-1">
+                            <Link href="/" className="nav-link text-sm font-medium">Home</Link>
+                            <Link href="/products?category=Diapers" className="nav-link text-sm font-medium">Diapers & Pants</Link>
+                            <Link href="/products?category=Wipes" className="nav-link text-sm font-medium">Wet Wipes</Link>
+                            <Link href="/products?category=Skincare" className="nav-link text-sm font-medium">Bath & Skincare</Link>
+                            <Link href="/products?category=Clothing" className="nav-link text-sm font-medium">Clothing</Link>
+                            <Link href="/products?category=Toys" className="nav-link text-sm font-medium">Toys</Link>
+                            <Link href="/products?category=Health" className="nav-link text-sm font-medium">Health</Link>
                         </div>
 
                         {/* Right Side Actions */}
-                        <div className="navbar-actions">
+                        <div className="navbar-actions flex gap-7 items-center z-[10000]" style={{ gap: '28px' }}>
                             {/* Cart */}
                             <Link href="/cart" className="nav-icon-btn cart-btn" aria-label={`Shopping cart with ${cartCount} items`}>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

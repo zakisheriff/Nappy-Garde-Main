@@ -22,12 +22,12 @@ export default function CartPage() {
 
     if (cartItems.length === 0) {
         return (
-            <div className="cart-page page empty">
-                <div className="empty-cart-container">
-                    <div className="empty-icon"><BagIcon /></div>
-                    <h2>Your bag is empty.</h2>
-                    <p>Free delivery and free returns.</p>
-                    <Link href="/products" className="btn btn-primary btn-large">Continue Shopping</Link>
+            <div className="cart-page page empty flex flex-col items-center justify-center min-h-[60vh]">
+                <div className="empty-cart-container flex flex-col items-center text-center">
+                    <div className="empty-icon mb-6"><BagIcon /></div>
+                    <h2 className="text-3xl font-bold mb-4">Your bag is empty.</h2>
+                    <p className="text-gray-500 mb-8 text-lg">Free delivery and free returns.</p>
+                    <Link href="/products" className="btn btn-primary btn-large inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors">Continue Shopping</Link>
                 </div>
             </div>
         );
