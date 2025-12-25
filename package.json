@@ -1,0 +1,27 @@
+{
+    "name": "nappy-garde",
+    "version": "1.0.0",
+    "description": "Full-stack e-commerce platform for premium baby diapers",
+    "private": true,
+    "scripts": {
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
+        "dev:backend": "cd backend && npm run dev",
+        "dev:frontend": "cd frontend && npm run dev",
+        "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+        "setup:db": "./setup-db.sh",
+        "build:frontend": "cd frontend && npm run build",
+        "start:backend": "cd backend && npm start"
+    },
+    "keywords": [
+        "ecommerce",
+        "react",
+        "nodejs",
+        "express",
+        "postgresql"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
