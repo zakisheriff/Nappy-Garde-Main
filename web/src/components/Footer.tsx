@@ -7,21 +7,18 @@ const Footer = () => {
         <div className="flex flex-col w-full">
 
             {/* Footer Section - Dark Background */}
-            <footer className="bg-gray-900 text-white py-24 w-full mt-0">
+            <footer className="bg-gray-900 text-white w-full mt-0" style={{ padding: '80px 0' }}>
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 lg:gap-x-24 gap-y-16 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-4 whitespace-nowrap" style={{ gap: '48px', marginBottom: '64px', textAlign: 'center' }}>
                         {/* Company Info */}
-                        <div className="col-span-2 md:col-span-1">
-                            <h3 className="text-xl font-bold mb-4 !text-white">Nappy Garde</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                                Premium baby care for every stage of your baby's growth.
-                            </p>
+                        <div className="col-span-1 md:col-span-1 whitespace-normal flex flex-col items-center">
+                            <h3 className="text-xl font-bold mb-4 !text-white text-center">Nappy Garde</h3>
                         </div>
 
                         {/* Shop */}
-                        <div>
-                            <h4 className="font-semibold mb-8 !text-white text-lg">Shop</h4>
-                            <ul className="space-y-6 text-sm">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+                            <h4 className="font-semibold text-lg !text-white" style={{ marginBottom: '8px' }}>Shop</h4>
+                            <ul className="text-sm" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
                                 <li><Link href="/products" className="text-gray-400 hover:text-white transition-colors">All Products</Link></li>
                                 <li><Link href="/products?category=Diapers" className="text-gray-400 hover:text-white transition-colors">Diapers & Pants</Link></li>
                                 <li><Link href="/products?category=Wipes" className="text-gray-400 hover:text-white transition-colors">Wet Wipes</Link></li>
@@ -30,9 +27,9 @@ const Footer = () => {
                         </div>
 
                         {/* Support */}
-                        <div>
-                            <h4 className="font-semibold mb-8 !text-white text-lg">Support</h4>
-                            <ul className="space-y-6 text-sm">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+                            <h4 className="font-semibold text-lg !text-white" style={{ marginBottom: '8px' }}>Support</h4>
+                            <ul className="text-sm" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
                                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
                                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
                                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
@@ -40,19 +37,19 @@ const Footer = () => {
                         </div>
 
                         {/* Quick Links */}
-                        <div>
-                            <h4 className="font-semibold mb-8 !text-white text-lg">Quick Links</h4>
-                            <ul className="space-y-6 text-sm">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+                            <h4 className="font-semibold text-lg !text-white" style={{ marginBottom: '8px' }}>Quick Links</h4>
+                            <ul className="text-sm" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
                                 <li><Link href="/cart" className="text-gray-400 hover:text-white transition-colors">Shopping Cart</Link></li>
                             </ul>
                         </div>
                     </div>
 
-                    <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-gray-500 text-sm">
+                    <div  style={{marginTop: '20px'}}>
+                        <p className="text-gray-500 text-sm text-center">
                             © {new Date().getFullYear()} Nappy Garde. All rights reserved.
                         </p>
-                        <div className="flex gap-6">
+                        <div className="flex gap-6 justify-center">
                             <a href="#" className="text-gray-400 hover:text-white transition-colors transform hover:scale-110" aria-label="Facebook">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

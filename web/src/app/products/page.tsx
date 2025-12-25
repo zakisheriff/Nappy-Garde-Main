@@ -8,11 +8,18 @@ import './Products.css';
 function ProductsContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [products, setProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState<any[]>([]); // Store all raw products
+    const [products, setProducts] = useState<any[]>([]); // Store filtered products to display
     const [loading, setLoading] = useState(true);
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-    const [filters, setFilters] = useState({
+    const [filters, setFilters] = useState<{
+        category: string;
+        search: string;
+        brand: string[];
+        inStock: boolean;
+        sort: string;
+    }>({
         category: searchParams.get('category') || '',
         search: searchParams.get('search') || '',
         brand: [],
@@ -28,54 +35,62 @@ function ProductsContent() {
         setFilters(prev => ({ ...prev, category, search }));
     }, [searchParams]);
 
+    // Initial Fetch - Runs ONCE
     useEffect(() => {
         fetchProducts();
-    }, [filters]);
+    }, []);
+
+    // Filter Logic - Runs when filters or data change
+    useEffect(() => {
+        let data = [...allProducts];
+
+        // Apply filters
+        if (filters.category) {
+            data = data.filter(p => p.category === filters.category);
+        }
+        if (filters.search) {
+            data = data.filter(p =>
+                p.ProductName.toLowerCase().includes(filters.search.toLowerCase())
+            );
+        }
+        if (filters.brand.length > 0) {
+            data = data.filter(p => filters.brand.includes(p.brand));
+        }
+        if (filters.inStock) {
+            data = data.filter(p => Number(p.Stock) > 0);
+        }
+
+        // Apply sorting
+        if (filters.sort === 'price_asc') {
+            data.sort((a, b) => Number(a.Price) - Number(b.Price));
+        } else if (filters.sort === 'price_desc') {
+            data.sort((a, b) => Number(b.Price) - Number(a.Price));
+        }
+
+        setProducts(data);
+    }, [filters, allProducts]);
 
     const fetchProducts = async () => {
         try {
             setLoading(true);
             const res = await fetch('/api/products');
-            let data = await res.json();
-
-            // Apply filters
-            if (filters.category) {
-                data = data.filter(p => p.category === filters.category);
-            }
-            if (filters.search) {
-                data = data.filter(p =>
-                    p.ProductName.toLowerCase().includes(filters.search.toLowerCase())
-                );
-            }
-            if (filters.brand.length > 0) {
-                data = data.filter(p => filters.brand.includes(p.brand));
-            }
-            if (filters.inStock) {
-                data = data.filter(p => Number(p.Stock) > 0);
-            }
-
-            // Apply sorting
-            if (filters.sort === 'price_asc') {
-                data.sort((a, b) => Number(a.Price) - Number(b.Price));
-            } else if (filters.sort === 'price_desc') {
-                data.sort((a, b) => Number(b.Price) - Number(a.Price));
-            }
-
-            setProducts(data);
+            const data = await res.json();
+            setAllProducts(data);
         } catch (error) {
             console.error('Error fetching products:', error);
+            setAllProducts([]);
             setProducts([]);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleFilterChange = (key, value) => {
+    const handleFilterChange = (key: keyof typeof filters, value: any) => {
         setFilters(prev => ({ ...prev, [key]: value }));
     };
 
-    const handleMultiSelect = (key, value) => {
-        setFilters(prev => ({
+    const handleMultiSelect = (key: 'brand', value: string) => {
+        setFilters((prev) => ({
             ...prev,
             [key]: prev[key].includes(value)
                 ? prev[key].filter(v => v !== value)
@@ -93,49 +108,6 @@ function ProductsContent() {
         });
         router.push('/products');
     };
-
-    const FilterContent = () => (
-        <>
-            {/* Search */}
-            <div className="filter-group">
-                <h4>SEARCH</h4>
-                <input
-                    type="text"
-                    className="form-input"
-                    placeholder="Search..."
-                    value={filters.search}
-                    onChange={(e) => handleFilterChange('search', e.target.value)}
-                />
-            </div>
-
-            {/* Brand Filter */}
-            <div className="filter-group">
-                <h4>BRAND</h4>
-                {BRANDS.map(brand => (
-                    <label key={brand} className="filter-option">
-                        <input
-                            type="checkbox"
-                            checked={filters.brand.includes(brand)}
-                            onChange={() => handleMultiSelect('brand', brand)}
-                        />
-                        {brand}
-                    </label>
-                ))}
-            </div>
-
-            {/* In Stock Toggle */}
-            <div className="filter-group checkbox-group">
-                <label className="filter-option">
-                    <input
-                        type="checkbox"
-                        checked={filters.inStock}
-                        onChange={(e) => handleFilterChange('inStock', e.target.checked)}
-                    />
-                    In Stock Only
-                </label>
-            </div>
-        </>
-    );
 
     return (
         <div className="products-page">
@@ -165,7 +137,12 @@ function ProductsContent() {
                         <h3>Filters</h3>
                         <button onClick={clearFilters} className="clear-filters-btn">Clear All</button>
                     </div>
-                    <FilterContent />
+                    <FilterContent
+                        filters={filters}
+                        handleFilterChange={handleFilterChange}
+                        handleMultiSelect={handleMultiSelect}
+                        brands={BRANDS}
+                    />
                 </aside>
 
                 {/* Mobile Filter Modal */}
@@ -187,7 +164,12 @@ function ProductsContent() {
                             <div className="filters-header">
                                 <button onClick={clearFilters} className="clear-filters-btn">Clear All</button>
                             </div>
-                            <FilterContent />
+                            <FilterContent
+                                filters={filters}
+                                handleFilterChange={handleFilterChange}
+                                handleMultiSelect={handleMultiSelect}
+                                brands={BRANDS}
+                            />
                             <button
                                 className="mobile-filter-toggle"
                                 style={{ marginTop: '20px', backgroundColor: '#0071e3', color: 'white', border: 'none' }}
@@ -237,6 +219,50 @@ function ProductsContent() {
         </div>
     );
 }
+
+const FilterContent = ({ filters, handleFilterChange, handleMultiSelect, brands }: any) => (
+    <>
+        {/* Search */}
+        <div className="filter-group">
+            <h4>SEARCH</h4>
+            <input
+                type="text"
+                className="form-input"
+                placeholder="Search..."
+                value={filters.search}
+                onChange={(e) => handleFilterChange('search', e.target.value)}
+                style={{ border: '1px solid #d2d2d7', borderRadius: '12px', padding: '10px 12px', width: '100%' }}
+            />
+        </div>
+
+        {/* Brand Filter */}
+        <div className="filter-group">
+            <h4>BRAND</h4>
+            {brands.map((brand: string) => (
+                <label key={brand} className="filter-option">
+                    <input
+                        type="checkbox"
+                        checked={filters.brand.includes(brand)}
+                        onChange={() => handleMultiSelect('brand', brand)}
+                    />
+                    {brand}
+                </label>
+            ))}
+        </div>
+
+        {/* In Stock Toggle */}
+        <div className="filter-group checkbox-group">
+            <label className="filter-option">
+                <input
+                    type="checkbox"
+                    checked={filters.inStock}
+                    onChange={(e) => handleFilterChange('inStock', e.target.checked)}
+                />
+                In Stock Only
+            </label>
+        </div>
+    </>
+);
 
 export default function ProductsPage() {
     return (

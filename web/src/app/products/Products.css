@@ -180,6 +180,24 @@
     transform: translate(-50%, -50%);
 }
 
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d2d2d7;
+    /* Mild stroke */
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input:focus {
+    border-color: #0071e3;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+}
+
 .price-inputs {
     display: flex;
     align-items: center;

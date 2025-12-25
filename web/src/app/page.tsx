@@ -84,7 +84,7 @@ const Home = () => {
   }
 
   return (
-    <div className="home-page">
+    <div className="home-page" style={{ marginTop: "100px" }}>
       {/* 1. Hero Section */}
       <section className="hero-section hero-split-layout relative overflow-hidden">
         <div className="hero-aurora-1 absolute"></div>
@@ -92,7 +92,7 @@ const Home = () => {
 
         <div className="section-container hero-container-split flex flex-col md:flex-row items-center gap-8 py-12 px-4 relative z-10">
           <div className="hero-content-left flex-1 text-center md:text-left">
-            <h1 className="hero-headline-large text-4xl md:text-6xl font-bold mb-4 leading-tight">
+            <h1 className="hero-headline-large text-4xl md:text-6xl font-bold mb-4 leading-tight" >
               Premium Diapers <br />& Baby Care.
             </h1>
             <p className="hero-subtext-large text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
@@ -152,9 +152,9 @@ const Home = () => {
       </section>
 
       {/* 3. Best Sellers */}
-      <section className="section-container container mx-auto px-4 py-12 bg-gray-50 rounded-xl">
-        <h2 className="section-headline text-3xl font-bold mb-8 text-black">What Parents Are Loving</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="section-container container mx-auto px-4 py-24 bg-gray-50 rounded-xl" >
+        <h2 className="section-headline text-3xl font-bold mb-12 text-black text-center" >What Parents Are Loving</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center" >
           {bestSellers.map((product) => (
             <ProductCard key={product.ProductID} product={product} /> // Reusing ProductCard instead of custom mini card for consistency
           ))}
