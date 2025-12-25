@@ -2,75 +2,95 @@
 
 import { useCart } from '@/context/CartContext';
 import Link from 'next/link';
-import { Trash2 } from 'lucide-react';
+import './Cart.css';
+
+const BagIcon = () => (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#86868b' }}>
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+);
 
 export default function CartPage() {
-    const { cartItems, total, updateQuantity, removeFromCart, clearCart } = useCart();
+    const { cartItems, total, updateQuantity, removeFromCart } = useCart();
+
+    const handleQuantityChange = (id, newQty) => {
+        if (newQty < 1) return;
+        updateQuantity(id, newQty);
+    };
 
     if (cartItems.length === 0) {
         return (
-            <div className="container mx-auto px-4 py-16 text-center">
-                <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
-                <p className="mb-8 text-gray-500">Looks like you haven't added anything yet.</p>
-                <Link href="/products" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold">
-                    Start Shopping
-                </Link>
+            <div className="cart-page page empty">
+                <div className="empty-cart-container">
+                    <div className="empty-icon"><BagIcon /></div>
+                    <h2>Your bag is empty.</h2>
+                    <p>Free delivery and free returns.</p>
+                    <Link href="/products" className="btn btn-primary btn-large">Continue Shopping</Link>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+        <div className="cart-page page">
+            <div className="container-wide">
+                <h1 className="cart-title">Review your bag.</h1>
+                <p className="cart-subtitle">Free delivery and free returns.</p>
 
-            <div className="flex flex-col lg:flex-row gap-8">
-                {/* Cart Items List */}
-                <div className="lg:w-2/3 space-y-4">
-                    {cartItems.map((item) => (
-                        <div key={item.ProductID} className="flex items-center gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                            <img src={item.ImageURL || 'https://via.placeholder.com/100'} alt={item.ProductName} className="w-20 h-20 object-cover rounded" />
-                            <div className="flex-1">
-                                <h3 className="font-bold">{item.ProductName}</h3>
-                                <p className="text-gray-600">LKR {Number(item.Price).toFixed(2)}</p>
+                <div className="cart-layout">
+                    {/* Cart Items List */}
+                    <div className="cart-items">
+                        {cartItems.map(item => (
+                            <div key={item.ProductID} className="cart-item">
+                                <div className="item-image">
+                                    <img src={item.ImageURL || 'https://via.placeholder.com/150'} alt={item.ProductName} />
+                                </div>
+                                <div className="item-details">
+                                    <div className="item-header">
+                                        <h3>{item.ProductName}</h3>
+                                        <div className="item-price">LKR {(Number(item.Price) * item.quantity).toFixed(2)}</div>
+                                    </div>
+                                    <p className="item-specs">Unit Price: LKR {Number(item.Price).toFixed(2)}</p>
+
+                                    <div className="item-controls">
+                                        <div className="quantity-control-small">
+                                            <button onClick={() => handleQuantityChange(item.ProductID, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
+                                            <span>{item.quantity}</span>
+                                            <button onClick={() => handleQuantityChange(item.ProductID, item.quantity + 1)}>+</button>
+                                        </div>
+                                        <button className="remove-btn" onClick={() => removeFromCart(item.ProductID)}>Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Order Summary */}
+                    <div className="cart-summary">
+                        <div className="summary-card">
+                            <h2>Summary</h2>
+                            <div className="summary-row">
+                                <span>Subtotal</span>
+                                <span>LKR {total.toFixed(2)}</span>
+                            </div>
+                            <div className="summary-row">
+                                <span>Estimated Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div className="summary-row">
+                                <span>Estimated Tax</span>
+                                <span>Included</span>
+                            </div>
+                            <div className="divider"></div>
+                            <div className="summary-row total">
+                                <span>Total</span>
+                                <span>LKR {total.toFixed(2)}</span>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                <button onClick={() => updateQuantity(item.ProductID, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded text-gray-700 disabled:opacity-50" disabled={item.quantity <= 1}>-</button>
-                                <span className="font-semibold w-6 text-center">{item.quantity}</span>
-                                <button onClick={() => updateQuantity(item.ProductID, item.quantity + 1)} className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded text-gray-700">+</button>
-                            </div>
-
-                            <button onClick={() => removeFromCart(item.ProductID)} className="text-red-500 p-2 hover:bg-red-50 rounded">
-                                <Trash2 size={20} />
-                            </button>
+                            <Link href="/checkout" className="btn btn-primary btn-large checkout-btn">Check Out</Link>
                         </div>
-                    ))}
-
-                    <button onClick={clearCart} className="text-red-500 text-sm hover:underline mt-4">
-                        Clear Cart
-                    </button>
-                </div>
-
-                {/* Summary */}
-                <div className="lg:w-1/3">
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-24">
-                        <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-                        <div className="flex justify-between mb-2">
-                            <span>Subtotal</span>
-                            <span>LKR {total.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between mb-4">
-                            <span>Shipping</span>
-                            <span className="text-green-600">Calculated at Checkout</span>
-                        </div>
-                        <div className="border-t pt-4 flex justify-between font-bold text-xl mb-6">
-                            <span>Total</span>
-                            <span>LKR {total.toFixed(2)}</span>
-                        </div>
-
-                        <Link href="/checkout" className="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-full font-bold">
-                            Proceed to Checkout
-                        </Link>
                     </div>
                 </div>
             </div>

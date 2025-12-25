@@ -13,26 +13,23 @@ function getGoogleDoc() {
 }
 
 export async function getProducts() {
-  try {
-    const doc = getGoogleDoc();
-    await doc.loadInfo();
-    const sheet = doc.sheetsByTitle['Products'];
-    if (!sheet) {
-      throw new Error("Products sheet not found. Please create a tab named 'Products'.");
-    }
-    const rows = await sheet.getRows();
-    return rows.map((row) => ({
-      ProductID: row.get('ProductID'),
-      ProductName: row.get('ProductName'),
-      Price: row.get('Price'),
-      Stock: row.get('Stock'),
-      Description: row.get('Description'),
-      ImageURL: row.get('ImageURL'),
-    }));
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return [];
+  const doc = getGoogleDoc();
+  await doc.loadInfo();
+  const sheet = doc.sheetsByTitle['Products'];
+  if (!sheet) {
+    throw new Error("Products sheet not found. Please create a tab named 'Products'.");
   }
+  const rows = await sheet.getRows();
+  return rows.map((row) => ({
+    ProductID: row.get('ProductID'),
+    ProductName: row.get('ProductName'),
+    Price: row.get('Price'),
+    Stock: row.get('Stock'),
+    Description: row.get('Description'),
+    ImageURL: row.get('ImageURL'),
+    category: row.get('category'),
+    brand: row.get('Brand'),
+  }));
 }
 
 export async function addOrder(order: any) {

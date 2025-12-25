@@ -3,133 +3,84 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
-import './Products.css'; // Ensure this CSS path is correct or moved to global modules
+import './Products.css';
 
-// Component wrapper for Suspense
 function ProductsContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [allProducts, setAllProducts] = useState<any[]>([]);
-    const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
 
-    // Initial Filter State
     const [filters, setFilters] = useState({
         category: searchParams.get('category') || '',
         search: searchParams.get('search') || '',
-        brand: [] as string[],
-        size: [] as string[],
-        type: [] as string[],
-        minPrice: '',
-        maxPrice: '',
-        minPieces: '',
-        maxPieces: '',
+        brand: [],
         inStock: false,
         sort: 'newest',
     });
 
-    const [showMobileFilters, setShowMobileFilters] = useState(false);
-
     const BRANDS = ['Marvel', 'Global II', 'Velona Cuddles', 'Pampers'];
-    // Mock category filters logic (simplified for file length, copying core logic)
-    const CATEGORY_FILTERS: any = {
-        'Diapers': { showBrand: true, showSize: true, showType: true, showPrice: true, showPieces: true, sizes: ['Newborn', 'Small', 'Medium', 'Large', 'XL', 'XXL'], types: ['Tape', 'Pants'] },
-        'Wipes': { showBrand: true, showSize: true, showType: true, showPrice: true, showPieces: true },
-        // Add others as needed or default fallback
-        'default': { showBrand: true, showSize: true, showType: true, showPrice: true, showPieces: true, sizes: ['Newborn', 'Small', 'Medium', 'Large', 'XL', 'XXL'], types: ['Tape', 'Pants'] }
-    };
 
-    const currentCategoryConfig = CATEGORY_FILTERS[filters.category] || CATEGORY_FILTERS['default'];
-    const availableSizes = currentCategoryConfig.sizes || [];
-    const availableTypes = currentCategoryConfig.types || [];
-
-    // Fetch All Products ONCE
-    useEffect(() => {
-        const fetchAll = async () => {
-            try {
-                const res = await fetch('/api/products');
-                const data = await res.json();
-                if (Array.isArray(data)) {
-                    setAllProducts(data);
-                }
-            } catch (err) {
-                console.error("Failed to fetch products", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchAll();
-    }, []);
-
-    // Update filters when URL params change
     useEffect(() => {
         const category = searchParams.get('category') || '';
         const search = searchParams.get('search') || '';
-
-        setFilters(prev => {
-            if (prev.category !== category) return { ...prev, category, search, size: [], type: [] }; // Reset sub-filters
-            if (prev.search !== search) return { ...prev, search };
-            return prev;
-        });
+        setFilters(prev => ({ ...prev, category, search }));
     }, [searchParams]);
 
-    // Apply Filters Locally
     useEffect(() => {
-        if (!allProducts.length) return;
+        fetchProducts();
+    }, [filters]);
 
-        let result = [...allProducts];
+    const fetchProducts = async () => {
+        try {
+            setLoading(true);
+            const res = await fetch('/api/products');
+            let data = await res.json();
 
-        // Filter: Category (Exact or Partial match? Logic implies exact usually, but sheet might have mapped names)
-        // We assume sheet has 'Description' or we rely on explicit 'Category' column if added. 
-        // Instructions said: ProductID, ProductName, Price, Stock, Description, ImageURL.
-        // We might need to guess category from Description or Name if column missing.
-        // Or assume user added 'Category' column as per "Update products... without touching code".
-        // I'll check property existence.
-        if (filters.category) {
-            result = result.filter(p =>
-                (p.category && p.category === filters.category) ||
-                (p.Description && p.Description.includes(filters.category)) ||
-                (p.ProductName && p.ProductName.includes(filters.category)) // Fallback
-            );
+            // Apply filters
+            if (filters.category) {
+                data = data.filter(p => p.category === filters.category);
+            }
+            if (filters.search) {
+                data = data.filter(p =>
+                    p.ProductName.toLowerCase().includes(filters.search.toLowerCase())
+                );
+            }
+            if (filters.brand.length > 0) {
+                data = data.filter(p => filters.brand.includes(p.brand));
+            }
+            if (filters.inStock) {
+                data = data.filter(p => Number(p.Stock) > 0);
+            }
+
+            // Apply sorting
+            if (filters.sort === 'price_asc') {
+                data.sort((a, b) => Number(a.Price) - Number(b.Price));
+            } else if (filters.sort === 'price_desc') {
+                data.sort((a, b) => Number(b.Price) - Number(a.Price));
+            }
+
+            setProducts(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            setProducts([]);
+        } finally {
+            setLoading(false);
         }
-
-        if (filters.search) {
-            const q = filters.search.toLowerCase();
-            result = result.filter(p => p.ProductName.toLowerCase().includes(q) || (p.Description && p.Description.toLowerCase().includes(q)));
-        }
-
-        if (filters.brand.length > 0) {
-            // Basic brand detection
-            result = result.filter(p => filters.brand.some(b => p.ProductName.includes(b) || (p.Description && p.Description.includes(b))));
-        }
-
-        if (filters.inStock) {
-            result = result.filter(p => Number(p.Stock) > 0);
-        }
-
-        // Sorting
-        if (filters.sort === 'price_asc') result.sort((a, b) => Number(a.Price) - Number(b.Price));
-        if (filters.sort === 'price_desc') result.sort((a, b) => Number(b.Price) - Number(a.Price));
-        // Newest logic requires Date field, if not present ignore or reverse id
-        if (filters.sort === 'newest') result.reverse();
-
-        setFilteredProducts(result);
-
-    }, [filters, allProducts]);
-
-
-    const handleFilterChange = (key: string, value: any) => {
-        setFilters(prev => ({ ...prev, [key]: value }));
-        // Also update URL if category/search changes? 
-        // Not strictly needed for client filter but good UX.
     };
 
-    const handleMultiSelect = (key: 'brand' | 'size' | 'type', value: string) => {
-        setFilters(prev => {
-            const current = prev[key];
-            const updated = current.includes(value) ? current.filter(item => item !== value) : [...current, value];
-            return { ...prev, [key]: updated };
-        });
+    const handleFilterChange = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+    };
+
+    const handleMultiSelect = (key, value) => {
+        setFilters(prev => ({
+            ...prev,
+            [key]: prev[key].includes(value)
+                ? prev[key].filter(v => v !== value)
+                : [...prev[key], value]
+        }));
     };
 
     const clearFilters = () => {
@@ -137,117 +88,151 @@ function ProductsContent() {
             category: '',
             search: '',
             brand: [],
-            size: [],
-            type: [],
-            minPrice: '',
-            maxPrice: '',
-            minPieces: '',
-            maxPieces: '',
             inStock: false,
             sort: 'newest',
         });
         router.push('/products');
-        setShowMobileFilters(false);
     };
 
-    // ... (Use same JSX structure from legacy, adapted)
-
-    // Helper for Filters UI to reduce code duplication
-    const FilterUI = () => (
-        <div className="space-y-6">
+    const FilterContent = () => (
+        <>
+            {/* Search */}
             <div className="filter-group">
-                <h4 className="font-bold mb-2">Search</h4>
-                <input type="text" className="w-full border p-2 rounded" placeholder="Search..." value={filters.search} onChange={e => handleFilterChange('search', e.target.value)} />
+                <h4>SEARCH</h4>
+                <input
+                    type="text"
+                    className="form-input"
+                    placeholder="Search..."
+                    value={filters.search}
+                    onChange={(e) => handleFilterChange('search', e.target.value)}
+                />
             </div>
-            {/* Brands */}
+
+            {/* Brand Filter */}
             <div className="filter-group">
-                <h4 className="font-bold mb-2">Brand</h4>
-                {BRANDS.map(b => (
-                    <label key={b} className="flex items-center space-x-2 block mb-1">
-                        <input type="checkbox" checked={filters.brand.includes(b)} onChange={() => handleMultiSelect('brand', b)} />
-                        <span>{b}</span>
+                <h4>BRAND</h4>
+                {BRANDS.map(brand => (
+                    <label key={brand} className="filter-option">
+                        <input
+                            type="checkbox"
+                            checked={filters.brand.includes(brand)}
+                            onChange={() => handleMultiSelect('brand', brand)}
+                        />
+                        {brand}
                     </label>
                 ))}
             </div>
-            {/* In Stock */}
-            <label className="flex items-center space-x-2">
-                <input type="checkbox" checked={filters.inStock} onChange={e => handleFilterChange('inStock', e.target.checked)} />
-                <span>In Stock Only</span>
-            </label>
-        </div>
+
+            {/* In Stock Toggle */}
+            <div className="filter-group checkbox-group">
+                <label className="filter-option">
+                    <input
+                        type="checkbox"
+                        checked={filters.inStock}
+                        onChange={(e) => handleFilterChange('inStock', e.target.checked)}
+                    />
+                    In Stock Only
+                </label>
+            </div>
+        </>
     );
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="pt-16 px-4 md:px-8 pb-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">{filters.category ? `${filters.category}` : 'All Products'}</h1>
-                        <select value={filters.sort} onChange={e => handleFilterChange('sort', e.target.value)} className="border-none bg-white shadow-sm p-3 rounded-xl min-w-[180px] text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="newest">Newest</option>
-                            <option value="price_asc">Price: Low to High</option>
-                            <option value="price_desc">Price: High to Low</option>
-                        </select>
+        <div className="products-page">
+            <div className="products-layout">
+                {/* Mobile Filter Toggle */}
+                <button
+                    className="mobile-filter-toggle mobile-only"
+                    onClick={() => setShowMobileFilters(true)}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                    Filters
+                </button>
+
+                {/* Desktop Sidebar */}
+                <aside className="filters-sidebar desktop-only">
+                    <div className="filters-header">
+                        <h3>Filters</h3>
+                        <button onClick={clearFilters} className="clear-filters-btn">Clear All</button>
+                    </div>
+                    <FilterContent />
+                </aside>
+
+                {/* Mobile Filter Modal */}
+                {showMobileFilters && (
+                    <div className="mobile-filters-modal">
+                        <div className="filters-header" style={{ padding: '20px' }}>
+                            <h3>Filters</h3>
+                            <button
+                                className="close-filters-mobile"
+                                onClick={() => setShowMobileFilters(false)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="mobile-filters-content">
+                            <div className="filters-header">
+                                <button onClick={clearFilters} className="clear-filters-btn">Clear All</button>
+                            </div>
+                            <FilterContent />
+                            <button
+                                className="mobile-filter-toggle"
+                                style={{ marginTop: '20px', backgroundColor: '#0071e3', color: 'white', border: 'none' }}
+                                onClick={() => setShowMobileFilters(false)}
+                            >
+                                Show Results
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Main Content */}
+                <main className="products-content">
+                    <div className="products-header">
+                        <h1>{filters.category ? `${filters.category} Products` : 'All Products'}</h1>
+                        <div className="products-controls">
+                            <select
+                                className="sort-select"
+                                value={filters.sort}
+                                onChange={(e) => handleFilterChange('sort', e.target.value)}
+                                style={{ width: 'auto', minWidth: '160px' }}
+                            >
+                                <option value="newest">Newest Arrivals</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
+                            </select>
+                        </div>
                     </div>
 
-                    {/* Mobile Show Filters Button - Below heading */}
-                    <button
-                        className="w-full md:hidden bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 rounded-xl mb-6 font-semibold shadow-lg active:scale-[0.98] transition-transform"
-                        style={{ color: '#ffffff' }}
-                        onClick={() => setShowMobileFilters(true)}
-                    >
-                        Show Filters
-                    </button>
-
-                    <div className="flex flex-col md:flex-row gap-6">
-                        {/* Desktop Sidebar - Hidden on Mobile */}
-                        <aside className="hidden md:block w-64 flex-shrink-0 bg-white p-6 rounded-xl shadow-sm h-fit sticky top-20">
-                            <div className="flex justify-between items-center mb-6">
-                                <h3 className="font-bold text-xl">Filters</h3>
-                                <button onClick={clearFilters} className="text-sm text-red-500 hover:text-red-700 font-medium">Clear All</button>
-                            </div>
-                            <FilterUI />
-                        </aside>
-
-                        {/* Mobile Modal - Only shows when button clicked */}
-                        {showMobileFilters && (
-                            <div className="fixed inset-0 z-[100] bg-white overflow-y-auto md:hidden">
-                                <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center">
-                                    <h3 className="font-bold text-2xl">Filters</h3>
-                                    <button onClick={() => setShowMobileFilters(false)} className="text-3xl text-gray-600 w-10 h-10 flex items-center justify-center">&times;</button>
-                                </div>
-                                <div className="p-4">
-                                    <FilterUI />
-                                </div>
-                                <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
-                                    <button onClick={() => setShowMobileFilters(false)} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 py-4 rounded-xl font-semibold shadow-lg active:scale-[0.98] transition-transform" style={{ color: '#ffffff' }}>
-                                        Apply Filters
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-
-                        <main className="flex-1 min-w-0">
-                            {loading ? (
-                                <div className="flex justify-center items-center py-20">
-                                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
-                                </div>
-                            ) : (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    {filteredProducts.map(p => (
-                                        <ProductCard key={p.ProductID} product={p} />
-                                    ))}
-                                    {filteredProducts.length === 0 && (
-                                        <div className="col-span-full text-center py-20 bg-white rounded-xl shadow-sm">
-                                            <p className="text-gray-500 text-lg mb-4">No products found.</p>
-                                            <button onClick={clearFilters} className="text-blue-600 hover:text-blue-700 font-semibold">Clear Filters</button>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </main>
-                    </div>
-                </div>
+                    {loading ? (
+                        <div className="loading-container">
+                            <div className="loading-spinner"></div>
+                        </div>
+                    ) : !Array.isArray(products) || products.length === 0 ? (
+                        <div className="no-products">
+                            <p>No products found. Try adjusting your filters.</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-4" style={{ gap: '24px' }}>
+                            {products.map((product) => (
+                                <ProductCard key={product.ProductID} product={product} />
+                            ))}
+                        </div>
+                    )}
+                </main>
             </div>
         </div>
     );

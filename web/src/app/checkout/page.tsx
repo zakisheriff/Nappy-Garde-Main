@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
+import './Checkout.css';
 
 export default function CheckoutPage() {
-    const { cartItems, total, clearCart } = useCart();
+    const { cartItems, total, clearCart, removeFromCart } = useCart();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -15,14 +16,15 @@ export default function CheckoutPage() {
     });
 
     if (cartItems.length === 0) {
-        return <div className="p-8 text-center">Cart is empty. Redirecting...</div>;
+        router.push('/cart');
+        return null;
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
@@ -41,18 +43,15 @@ export default function CheckoutPage() {
             const orderData = await orderRes.json();
 
             if (orderData.success) {
-                // 2. Clear Cart
-                // Store order details loosely for success page if needed, but we go straight to WhatsApp
-                // 3. Construct WhatsApp Message
+                // 2. Construct WhatsApp Message
                 const itemsList = cartItems.map(i => `- ${i.ProductName} (x${i.quantity})`).join('%0a');
                 const message = `*New Order: ${orderData.orderId}*%0a%0a*Customer:* ${formData.name}%0a*Phone:* ${formData.phone}%0a*Address:* ${formData.address}%0a%0a*Items:*%0a${itemsList}%0a%0a*Total:* LKR ${total.toFixed(2)}%0a%0aPlease confirm my order.`;
 
-                // Replace with shop's phone number
-                const shopPhone = '94758760367'; // Nappy Garde WhatsApp
+                const shopPhone = '94758760367';
                 const whatsappUrl = `https://wa.me/${shopPhone}?text=${message}`;
 
                 clearCart();
-                window.location.href = whatsappUrl; // Redirect to WhatsApp
+                window.location.href = whatsappUrl;
             } else {
                 alert('Failed to place order. Please try again.');
             }
@@ -65,39 +64,105 @@ export default function CheckoutPage() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-2xl">
-            <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
+        <div className="checkout-page page">
+            <div className="container-wide checkout-container">
+                <div className="checkout-main">
+                    <h1 className="checkout-title">Checkout</h1>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                        <label className="block text-sm font-bold mb-2">Full Name</label>
-                        <input required name="name" type="text" className="w-full border p-3 rounded-lg" value={formData.name} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-bold mb-2">Phone Number</label>
-                        <input required name="phone" type="tel" className="w-full border p-3 rounded-lg" value={formData.phone} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-bold mb-2">Delivery Address</label>
-                        <textarea required name="address" rows={3} className="w-full border p-3 rounded-lg" value={formData.address} onChange={handleChange} />
-                    </div>
+                    <form id="checkout-form" onSubmit={handleSubmit}>
+                        <div className="form-section">
+                            <h2>Delivery Information</h2>
+                            <div className="form-group">
+                                <label>Full Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="form-input"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Phone Number</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    className="form-input"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Delivery Address</label>
+                                <textarea
+                                    name="address"
+                                    className="form-input"
+                                    rows={3}
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
 
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="font-bold mb-2">Order Summary</h3>
-                        <div className="flex justify-between text-lg font-bold">
+                        <div className="form-section">
+                            <h2>Payment</h2>
+                            <div className="payment-options">
+                                <div className="payment-option selected">
+                                    <input type="radio" checked readOnly />
+                                    <span>Cash on Delivery (COD)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div className="checkout-sidebar">
+                    <div className="order-summary-card">
+                        <h2>In Your Bag</h2>
+                        <div className="summary-items-list">
+                            {cartItems.map(item => (
+                                <div key={item.ProductID} className="summary-item">
+                                    <div className="summary-item-img">
+                                        <img src={item.ImageURL || 'https://via.placeholder.com/80'} alt={item.ProductName} />
+                                    </div>
+                                    <div className="summary-item-info">
+                                        <span className="name">{item.ProductName}</span>
+                                        <span className="qty">Qty: {item.quantity}</span>
+                                    </div>
+                                    <div className="summary-item-price-actions">
+                                        <div className="summary-item-price">
+                                            LKR {(Number(item.Price) * item.quantity).toFixed(2)}
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="summary-remove-btn"
+                                            onClick={() => removeFromCart(item.ProductID)}
+                                            aria-label="Remove item"
+                                        >×</button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="divider"></div>
+                        <div className="summary-row total">
                             <span>Total</span>
                             <span>LKR {total.toFixed(2)}</span>
                         </div>
-                    </div>
 
-                    <button disabled={loading} type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-bold text-lg disabled:opacity-70">
-                        {loading ? 'Processing...' : 'Place Order on WhatsApp'}
-                    </button>
-                    <p className="text-xs text-center text-gray-500 mt-2">
-                        Clicking place order will save your order and open WhatsApp to send the details to us.
-                    </p>
-                </form>
+                        <button
+                            type="submit"
+                            form="checkout-form"
+                            className="btn btn-primary btn-large place-order-btn"
+                            disabled={loading}
+                        >
+                            {loading ? 'Processing...' : 'Place Order on WhatsApp'}
+                        </button>
+                        <p className="checkout-note">Clicking place order will save your order and open WhatsApp to send the details to us.</p>
+                    </div>
+                </div>
             </div>
         </div>
     );

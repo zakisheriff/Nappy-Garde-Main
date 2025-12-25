@@ -8,7 +8,11 @@ export async function GET() {
         const products = await getProducts();
         // Simple filter to exclude rows without ID if needed, or return all
         return NextResponse.json(products);
-    } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    } catch (error: any) {
+        console.error('Error in /api/products:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch products', details: error.message, stack: error.stack },
+            { status: 500 }
+        );
     }
 }
