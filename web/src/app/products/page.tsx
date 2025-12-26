@@ -13,6 +13,18 @@ function ProductsContent() {
     const [loading, setLoading] = useState(true);
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
+    // Lock body scroll when mobile filters are open
+    useEffect(() => {
+        if (showMobileFilters) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [showMobileFilters]);
+
     const [filters, setFilters] = useState<{
         category: string;
         search: string;
