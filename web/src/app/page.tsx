@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import "./Home.css";
+import { useScrollAnimationObserver } from '@/hooks/useScrollAnimation';
 // Icons
 import {
   Package,
@@ -36,6 +37,9 @@ const Home = () => {
   const [showSizeModal, setShowSizeModal] = useState(false);
   const [weight, setWeight] = useState('');
   const [sizeResult, setSizeResult] = useState<string | null>(null);
+
+  // Enable scroll animations
+  useScrollAnimationObserver();
 
   useEffect(() => {
     const fetchHomeProducts = async () => {
