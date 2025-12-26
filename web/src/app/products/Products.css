@@ -354,12 +354,36 @@
     }
 
     .products-controls {
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
+        gap: 8px;
+    }
+
+    .mobile-search-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #d2d2d7;
+        border-radius: 12px;
+        font-size: 14px;
+        outline: none;
+        background: #fff;
+        min-width: 0;
+    }
+
+    .mobile-search-input:focus {
+        border-color: #0071e3;
+        box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
     }
 
     .sort-select {
-        width: 100%;
+        width: auto;
+        min-width: 130px;
+        flex-shrink: 0;
+    }
+
+    /* Hide search from filter modal on mobile */
+    .mobile-filters-content .filter-group:first-child {
+        display: none;
     }
 
     /* Mobile Toggle Button */

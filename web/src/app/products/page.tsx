@@ -198,11 +198,18 @@ function ProductsContent() {
                     <div className="products-header">
                         <h1>{filters.category ? `${filters.category} Products` : 'All Products'}</h1>
                         <div className="products-controls">
+                            {/* Mobile Search - shown only on mobile */}
+                            <input
+                                type="text"
+                                className="mobile-search-input mobile-only"
+                                placeholder="Search..."
+                                value={filters.search}
+                                onChange={(e) => handleFilterChange('search', e.target.value)}
+                            />
                             <select
                                 className="sort-select"
                                 value={filters.sort}
                                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                                style={{ width: 'auto', minWidth: '160px' }}
                             >
                                 <option value="newest">Newest Arrivals</option>
                                 <option value="price_asc">Price: Low to High</option>
