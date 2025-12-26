@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { toast } from 'sonner';
+import ProductCard from '@/components/ProductCard';
 import './ProductDetail.css';
 
 const StarIcon = () => (
@@ -42,17 +43,30 @@ export default function ProductDetail() {
     const { id } = useParams();
     const { addToCart } = useCart();
     const [product, setProduct] = useState<Product | null>(null);
+    const [recommended, setRecommended] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
     const [adding, setAdding] = useState(false);
 
     useEffect(() => {
+        // Reset state when navigating to a new product
+        setLoading(true);
+        setProduct(null);
+        setQuantity(1);
+
         const fetchProduct = async () => {
             try {
                 const res = await fetch('/api/products');
                 const products = await res.json();
                 const found = products.find((p: any) => p.ProductID === id);
                 setProduct(found || null);
+
+                // Get recommended products (excluding current product)
+                if (Array.isArray(products)) {
+                    const available = products.filter((p: Product) => p.ProductID !== id);
+                    const shuffled = available.sort(() => 0.5 - Math.random());
+                    setRecommended(shuffled.slice(0, 4));
+                }
             } catch (error) {
                 console.error("Failed to load product", error);
             } finally {
@@ -70,8 +84,18 @@ export default function ProductDetail() {
         setAdding(false);
     };
 
-    if (loading) return <div className="loading-container"><div className="loading-spinner"></div></div>;
-    if (!product) return <div className="loading-container">Product not found</div>;
+    if (loading) return (
+        <div className="product-detail-page page">
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+            </div>
+        </div>
+    );
+    if (!product) return (
+        <div className="product-detail-page page">
+            <div className="loading-container">Product not found</div>
+        </div>
+    );
 
     const stock = Number(product.Stock);
 
@@ -155,6 +179,18 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
+
+            {/* Recommended Products */}
+            {recommended.length > 0 && (
+                <div className="container-wide recommended-section">
+                    <h2 className="recommended-title">You Might Also Like</h2>
+                    <div className="recommended-grid">
+                        {recommended.map(product => (
+                            <ProductCard key={product.ProductID} product={product} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

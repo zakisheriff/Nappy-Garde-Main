@@ -1551,13 +1551,14 @@
     overflow: hidden;
     cursor: pointer;
     background: #f5f5f7;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: block;
     text-decoration: none;
 }
 
 .stage-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
 .stage-bg {
@@ -1568,12 +1569,11 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s ease;
 }
 
 .stage-card:hover .stage-bg {
     transform: scale(1.05);
-    /* Subtle parallax like zoom */
 }
 
 .stage-overlay {
@@ -1584,6 +1584,11 @@
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
     z-index: 1;
+    transition: background 0.5s ease;
+}
+
+.stage-card:hover .stage-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
 }
 
 .stage-content {

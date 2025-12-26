@@ -169,14 +169,14 @@ const Home = () => {
         <h2 className="section-headline text-3xl font-bold mb-8 text-center">Find the Perfect Fit</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {['Newborn', 'Infant', 'Toddler'].map((stage, idx) => (
-            <Link href={`/products?category=${stage}`} key={stage} className="stage-card relative h-64 rounded-xl overflow-hidden group block">
-              <div className="stage-bg absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            <Link href={`/products?category=${stage}`} key={stage} className="stage-card">
+              <div className="stage-bg"
                 style={{ backgroundImage: `url('https://images.unsplash.com/photo-${idx === 0 ? '1544126592-807ade215a0b' : idx === 1 ? '1519689680058-324335c77eba' : '1519340241574-2cec6aef0c01'}?auto=format&fit=crop&w=800&q=80')` }}>
               </div>
-              <div className="stage-overlay absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
-              <div className="stage-content absolute bottom-6 left-6 text-white p-4">
-                <div className="stage-title text-2xl font-bold">{stage} Care</div>
-                <div className="stage-subtitle text-sm opacity-90">Essentials</div>
+              <div className="stage-overlay"></div>
+              <div className="stage-content">
+                <div className="stage-title">{stage} Care</div>
+                <div className="stage-subtitle">Essentials</div>
               </div>
             </Link>
           ))}

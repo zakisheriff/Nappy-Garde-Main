@@ -8,15 +8,22 @@
 .cart-page.empty {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.cart-page.empty .empty-cart-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    flex: 1;
+    min-height: calc(100vh - 500px);
 }
 
 .cart-page.empty .container-wide {
     width: 100%;
-    margin-top: 40px;
 }
 
 .empty-cart-container {
