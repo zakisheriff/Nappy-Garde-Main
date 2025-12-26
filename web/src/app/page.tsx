@@ -75,18 +75,7 @@ const Home = () => {
     if (sizeResult) setSizeResult(null);
   };
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-logo">Nappy Garde</div>
-        <div className="loading-dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    );
-  }
+  // No blocking loader - page shows immediately
 
   return (
     <div className="home-page">
@@ -145,9 +134,13 @@ const Home = () => {
       <section className="section-container">
         <h2 className="section-headline">New Arrivals for Your Baby</h2>
         <div className="products-grid">
-          {newArrivals.map((product) => (
-            <ProductCard key={product.ProductID} product={product} />
-          ))}
+          {loading ? (
+            <div className="products-loading">Loading products...</div>
+          ) : newArrivals.length > 0 ? (
+            newArrivals.map((product) => (
+              <ProductCard key={product.ProductID} product={product} />
+            ))
+          ) : null}
         </div>
       </section>
 
@@ -155,11 +148,15 @@ const Home = () => {
       <section className="section-container bestsellers-section">
         <h2 className="section-headline">What Parents Are Loving</h2>
         <div className="products-grid bestsellers-grid">
-          {bestSellers.map((product) => (
-            <div key={product.ProductID} className="product-card-wrapper">
-              <ProductCard product={product} />
-            </div>
-          ))}
+          {loading ? (
+            <div className="products-loading">Loading products...</div>
+          ) : bestSellers.length > 0 ? (
+            bestSellers.map((product) => (
+              <div key={product.ProductID} className="product-card-wrapper">
+                <ProductCard product={product} />
+              </div>
+            ))
+          ) : null}
         </div>
       </section>
 
@@ -182,8 +179,45 @@ const Home = () => {
         </div>
       </section >
 
+      {/* 6. Why Choose Nappy Garde */}
+      <section className="why-choose-section">
+        <div className="why-choose-container">
+          <h2 className="why-choose-title">Why Parents Trust Nappy Garde</h2>
+          <p className="why-choose-subtitle">Quality you can count on, every time.</p>
 
+          <div className="why-choose-grid">
+            <div className="why-card">
+              <div className="why-icon">
+                <ShieldCheck size={32} />
+              </div>
+              <h3 className="why-card-title">100% Authentic</h3>
+              <p className="why-card-text">Every product is sourced directly from authorized distributors.</p>
+            </div>
 
+            <div className="why-card">
+              <div className="why-icon">
+                <FastForward size={32} />
+              </div>
+              <h3 className="why-card-title">Same Day Delivery</h3>
+              <p className="why-card-text">Order before 2 PM and receive your essentials the same day.</p>
+            </div>
+
+            <div className="why-card">
+              <div className="why-icon">
+                <HeartHandshake size={32} />
+              </div>
+              <h3 className="why-card-title">Expert Support</h3>
+              <p className="why-card-text">Our team of parents is here to help you choose the right products.</p>
+            </div>
+          </div>
+
+          <div className="why-cta">
+            <Link href="/products" className="why-cta-btn">
+              Shop All Products
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Size Calculator Modal */}
       {

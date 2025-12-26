@@ -194,6 +194,114 @@
     text-decoration: underline;
 }
 
+/* ============================================= */
+/* WHY CHOOSE NAPPY GARDE */
+/* ============================================= */
+.why-choose-section {
+    background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+    padding: 80px 20px;
+}
+
+.why-choose-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.why-choose-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 12px;
+}
+
+.why-choose-subtitle {
+    font-size: 18px;
+    color: #6e6e73;
+    margin-bottom: 48px;
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 48px;
+}
+
+.why-card {
+    background: #ffffff;
+    padding: 32px 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.why-icon {
+    width: 64px;
+    height: 64px;
+    background: #f0f7ff;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #0071e3;
+}
+
+.why-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 12px;
+}
+
+.why-card-text {
+    font-size: 15px;
+    color: #6e6e73;
+    line-height: 1.5;
+}
+
+.why-cta {
+    margin-top: 32px;
+}
+
+.why-cta-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 17px;
+    font-weight: 600;
+    background: #1d1d1f;
+    color: #ffffff;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.why-cta-btn:hover {
+    background: #333;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .why-choose-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .why-choose-title {
+        font-size: 26px;
+    }
+
+    .why-choose-section {
+        padding: 48px 16px;
+    }
+}
+
 .home {
     min-height: 100vh;
 }
@@ -295,6 +403,16 @@
 .category-card p {
     color: var(--text-secondary);
     margin: 0;
+}
+
+/* Products Loading Indicator */
+.products-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 16px;
+    color: #6e6e73;
+    font-weight: 500;
 }
 
 /* Featured Products */

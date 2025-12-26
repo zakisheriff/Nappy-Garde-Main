@@ -80,6 +80,7 @@ export default function CheckoutPage() {
                                     type="text"
                                     name="name"
                                     className="form-input"
+                                    placeholder="e.g. John Doe"
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
@@ -87,14 +88,20 @@ export default function CheckoutPage() {
                             </div>
                             <div className="form-group">
                                 <label>Phone Number</label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    className="form-input"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <div className="phone-input-wrapper">
+                                    <span className="phone-prefix">+94</span>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        className="form-input phone-input"
+                                        placeholder="7XXXXXXXX"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        pattern="[0-9]{9}"
+                                        maxLength={9}
+                                        required
+                                    />
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label>Delivery Address</label>
@@ -102,6 +109,7 @@ export default function CheckoutPage() {
                                     name="address"
                                     className="form-input"
                                     rows={3}
+                                    placeholder="e.g. 123 Main Street, Colombo 07"
                                     value={formData.address}
                                     onChange={handleChange}
                                     required
@@ -162,7 +170,7 @@ export default function CheckoutPage() {
                         >
                             {loading ? 'Processing...' : 'Place Order on WhatsApp'}
                         </button>
-                        <p className="checkout-note">Clicking place order will save your order and open WhatsApp to send the details to us.</p>
+
                     </div>
                 </div>
             </div>
