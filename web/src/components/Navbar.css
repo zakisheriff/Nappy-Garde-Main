@@ -66,6 +66,18 @@
     background-clip: text;
 }
 
+.logo-image {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo-image {
+        height: 32px;
+    }
+}
+
 /* Desktop Navigation */
 .navbar-links {
     display: none;

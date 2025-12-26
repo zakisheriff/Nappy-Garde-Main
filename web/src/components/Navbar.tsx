@@ -48,7 +48,7 @@ const Navbar = () => {
                     <div className={`nav-content-wrapper ${searchOpen ? 'search-mode-hidden' : ''}`}>
                         {/* Logo */}
                         <Link href="/" className="navbar-logo search-hide" onClick={closeMobileMenu}>
-                            <span className="logo-text">Nappy Garde</span>
+                            <img src="/ng_logo.png" alt="Nappy Garde" className="logo-image" />
                         </Link>
 
                         {/* Desktop Navigation */}
