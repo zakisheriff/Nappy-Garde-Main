@@ -19,15 +19,25 @@
     border-bottom: none;
 }
 
+/* Apple.com-Inspired Navbar */
 .navbar-container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 32px !important;
+    padding: 0 12px !important;
+    /* Reduced Mobile padding - 12px for better edge alignment */
     height: 72px !important;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
+    width: 100%;
+}
+
+@media (min-width: 833px) {
+    .navbar-container {
+        padding: 0 32px !important;
+        /* Desktop padding */
+    }
 }
 
 /* Logo */
@@ -321,7 +331,12 @@
 
 /* Inline Search Styles */
 .nav-content-wrapper {
-    display: contents;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-grow: 1;
+    /* Ensure it takes full width */
     transition: opacity 0.2s ease;
 }
 
@@ -607,4 +622,37 @@
 body.menu-open {
     overflow: hidden;
     height: 100vh;
+}
+
+/* ============================================= */
+/* MOBILE NAVBAR ALIGNMENT FIX */
+/* ============================================= */
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0 16px !important;
+        justify-content: flex-start;
+    }
+
+    .nav-content-wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-logo {
+        margin-right: auto;
+    }
+
+    .navbar-actions {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .hamburger {
+        position: relative;
+        right: 0;
+    }
 }

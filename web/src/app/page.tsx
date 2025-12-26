@@ -77,74 +77,74 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div className="loading-screen">
+        <div className="loading-logo">Nappy Garde</div>
+        <div className="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="home-page" style={{ marginTop: "100px" }}>
+    <div className="home-page">
       {/* 1. Hero Section */}
-      <section className="hero-section hero-split-layout relative overflow-hidden">
-        <div className="hero-aurora-1 absolute"></div>
-        <div className="hero-aurora-2 absolute"></div>
+      <section className="hero-section">
+        <div className="hero-aurora-1"></div>
+        <div className="hero-aurora-2"></div>
 
-        <div className="section-container hero-container-split flex flex-col md:flex-row items-center gap-8 py-12 px-4 relative z-10">
-          <div className="hero-content-left flex-1 text-center md:text-left">
-            <h1 className="hero-headline-large text-4xl md:text-6xl font-bold mb-4 leading-tight" >
-              Premium Diapers <br />& Baby Care.
+        <div className="hero-container-split">
+          <div className="hero-content-left">
+            <h1 className="hero-headline-large">
+              Nappy Garde
             </h1>
-            <p className="hero-subtext-large text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-              <strong>Nappy Garde</strong> is your trusted source for <strong>100% authentic</strong> products.
-              <br className="hidden md:block" />Quality care delivered directly to your home.
+            <p className="hero-subtext-large">
+              Premium Diapers & Baby Care.
             </p>
 
-            <div className="hero-actions-left flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link href="/products" className="btn btn-primary btn-xl bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-semibold transition-all" style={{ color: '#ffffff' }}>
+            <div className="hero-actions-left">
+              <Link href="/products" className="btn btn-primary btn-xl btn-blue">
                 Shop All Essentials
               </Link>
               <button
                 onClick={() => setShowSizeModal(true)}
-                className="btn btn-primary btn-xl px-8 py-3 rounded-full font-semibold transition-all"
-                style={{ background: "rgba(203, 27, 27, 1)", color: '#ffffff' }}
+                className="btn btn-primary btn-xl btn-red"
               >
                 Find Size Guide
               </button>
             </div>
 
-            <div className="hero-badges-row flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
-              <div className="badge-pill flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm backdrop-blur-sm"><FastForward size={14} /> Fast Delivery</div>
-              <div className="badge-pill flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm backdrop-blur-sm"><ShieldCheck size={14} /> Authentic Brands</div>
-              <div className="badge-pill flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm backdrop-blur-sm"><Sparkles size={14} /> Premium Quality</div>
+            <div className="hero-badges-row">
+              <div className="badge-pill"><FastForward size={14} /> Fast Delivery</div>
+              <div className="badge-pill"><ShieldCheck size={14} /> Authentic Brands</div>
+              <div className="badge-pill"><Sparkles size={14} /> Premium Quality</div>
             </div>
           </div>
 
-          {/* Right: Visuals */}
-          <div className="hero-visuals-right flex-1 relative hidden md:block">
-            <div className="hero-main-image-wrapper relative h-[400px] w-full">
-              {/* Images would be next/image ideally, using standard img for external URLs compatibility with legacy */}
+          {/* Right: Visuals - Hidden on mobile via CSS */}
+          <div className="hero-visuals-right">
+            <div className="hero-main-image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=2787&auto=format&fit=crop"
                 alt="Happy Baby"
-                className="hero-main-image w-3/4 h-full object-cover rounded-2xl shadow-2xl absolute right-0 top-0 z-10"
+                className="hero-main-image"
               />
-              <div className="hero-collage-img w-1/2 h-1/2 absolute bottom-[-20px] left-0 z-20 rounded-xl overflow-hidden shadow-lg border-4 border-gray-800">
-                <img
-                  src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                  alt="Baby Products"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop"
+                alt="Baby Products"
+                className="hero-collage-img"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* 2. New Arrivals */}
-      <section className="section-container container mx-auto px-4 py-12">
-        <h2 className="section-headline text-3xl font-bold mb-8">New Arrivals for Your Baby</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="section-container">
+        <h2 className="section-headline">New Arrivals for Your Baby</h2>
+        <div className="products-grid">
           {newArrivals.map((product) => (
             <ProductCard key={product.ProductID} product={product} />
           ))}
@@ -152,11 +152,11 @@ const Home = () => {
       </section>
 
       {/* 3. Best Sellers */}
-      <section className="section-container container mx-auto px-4 py-24 bg-gray-50 rounded-xl" >
-        <h2 className="section-headline text-3xl font-bold mb-12 text-black text-center" >What Parents Are Loving</h2>
-        <div className="flex flex-wrap justify-center gap-8" >
+      <section className="section-container bestsellers-section">
+        <h2 className="section-headline">What Parents Are Loving</h2>
+        <div className="products-grid bestsellers-grid">
           {bestSellers.map((product) => (
-            <div key={product.ProductID} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] flex justify-center">
+            <div key={product.ProductID} className="product-card-wrapper">
               <ProductCard product={product} />
             </div>
           ))}
@@ -164,7 +164,7 @@ const Home = () => {
       </section>
 
       {/* 5. Shop by Baby Stage */}
-      <section className="section-container container mx-auto px-4 py-12">
+      <section className="section-container shop-by-stage">
         <h2 className="section-headline text-3xl font-bold mb-8 text-center">Find the Perfect Fit</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {['Newborn', 'Infant', 'Toddler'].map((stage, idx) => (
@@ -180,57 +180,59 @@ const Home = () => {
             </Link>
           ))}
         </div>
-      </section>
+      </section >
 
 
 
 
       {/* Size Calculator Modal */}
-      {showSizeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={() => setShowSizeModal(false)}>
-          <div className="bg-white text-black rounded-2xl p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
-            <button className="absolute top-4 right-4 text-gray-500 hover:text-black" onClick={() => setShowSizeModal(false)}>
-              <X size={24} />
-            </button>
+      {
+        showSizeModal && (
+          <div className="modal-overlay" onClick={() => setShowSizeModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <button className="modal-close-btn" onClick={() => setShowSizeModal(false)}>
+                <X size={24} />
+              </button>
 
-            <h3 className="text-2xl font-bold mb-2">Find Your Perfect Fit</h3>
-            <p className="text-gray-600 mb-6">Enter your baby's weight.</p>
+              <h3 className="modal-title">Find Your Perfect Fit</h3>
+              <p className="modal-subtitle">Enter your baby's weight.</p>
 
-            <div className="mb-6">
-              <label className="block text-sm font-semibold mb-2">Baby's Weight (kg)</label>
-              <input
-                type="number"
-                className="w-full border border-gray-300 rounded-lg p-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g. 5"
-                value={weight}
-                onChange={handleInput}
-                onKeyDown={e => e.key === 'Enter' && calculateSize()}
-              />
-            </div>
-
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold mb-6" onClick={calculateSize}>
-              Find Size
-            </button>
-
-            {sizeResult && (
-              <div className="bg-gray-100 p-4 rounded-xl flex justify-between items-center">
-                <div>
-                  <span className="block text-xs text-uppercase font-bold text-gray-500">RECOMMENDED</span>
-                  <span className="text-xl font-bold text-blue-600">{sizeResult}</span>
-                </div>
-                <Link
-                  href={`/products?size=${sizeResult}`}
-                  className="text-blue-600 font-semibold flex items-center gap-1 hover:underline"
-                  onClick={() => setShowSizeModal(false)}
-                >
-                  Shop Now <ArrowRight size={16} />
-                </Link>
+              <div className="modal-form-group">
+                <label className="modal-label">Baby's Weight (kg)</label>
+                <input
+                  type="number"
+                  className="modal-input"
+                  placeholder="e.g. 5"
+                  value={weight}
+                  onChange={handleInput}
+                  onKeyDown={e => e.key === 'Enter' && calculateSize()}
+                />
               </div>
-            )}
+
+              <button className="modal-submit-btn" onClick={calculateSize}>
+                Find Size
+              </button>
+
+              {sizeResult && (
+                <div className="modal-result">
+                  <div>
+                    <span className="modal-result-label">RECOMMENDED</span>
+                    <span className="modal-result-size">{sizeResult}</span>
+                  </div>
+                  <Link
+                    href={`/products?size=${sizeResult}`}
+                    className="modal-result-link"
+                    onClick={() => setShowSizeModal(false)}
+                  >
+                    Shop Now <ArrowRight size={16} />
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 };
 
