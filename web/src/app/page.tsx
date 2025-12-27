@@ -137,12 +137,14 @@ const Home = () => {
       {/* 2. New Arrivals */}
       <section className="section-container">
         <h2 className="section-headline">New Arrivals for Your Baby</h2>
-        <div className="products-grid">
+        <div className="products-grid bestsellers-grid">
           {loading ? (
             <div className="products-loading">Loading products...</div>
           ) : newArrivals.length > 0 ? (
             newArrivals.map((product) => (
-              <ProductCard key={product.ProductID} product={product} />
+              <div key={product.ProductID} className="product-card-wrapper">
+                <ProductCard product={product} />
+              </div>
             ))
           ) : null}
         </div>
