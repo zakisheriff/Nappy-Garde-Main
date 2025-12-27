@@ -19,11 +19,7 @@
 
 /* Filters Sidebar */
 .filters-sidebar {
-    position: sticky;
-    top: 100px;
-    /* Below navbar */
     max-height: calc(100vh - 140px);
-    /* 100px top + 40px bottom buffer */
     overflow-y: auto;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
@@ -364,15 +360,21 @@
         padding: 10px 14px;
         border: 1px solid #d2d2d7;
         border-radius: 12px;
-        font-size: 14px;
         outline: none;
         background: #fff;
         min-width: 0;
+        font-size: 16px;
+        /* iOS won't zoom if font-size >= 16px */
+        touch-action: manipulation;
+        -webkit-user-select: text;
+        user-select: text;
     }
 
     .mobile-search-input:focus {
         border-color: #0071e3;
         box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+        position: relative;
+        /* Keep in flow but prevent scroll */
     }
 
     .sort-select {
@@ -381,9 +383,9 @@
         flex-shrink: 0;
     }
 
-    /* Hide search from filter modal on mobile */
-    .mobile-filters-content .filter-group:first-child {
-        display: none;
+    /* Hide search from filter modal on mobile - it's already in the main view */
+    .mobile-filters-content .filter-group:first-of-type {
+        display: none !important;
     }
 
     /* Mobile Toggle Button */

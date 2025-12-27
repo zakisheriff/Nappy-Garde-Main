@@ -663,6 +663,34 @@
     max-width: 280px;
 }
 
+/* Mobile horizontal scroll for bestsellers */
+@media (max-width: 768px) {
+    .bestsellers-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding: 0 20px 20px 20px;
+        gap: 16px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+    }
+
+    .bestsellers-grid::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
+    }
+
+    .product-card-wrapper {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+    }
+}
+
 .glass-btn-dark {
     background: rgba(0, 0, 0, 0.05);
     color: #1d1d1f;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import './Products.css';
@@ -12,6 +12,7 @@ function ProductsContent() {
     const [products, setProducts] = useState<any[]>([]); // Store filtered products to display
     const [loading, setLoading] = useState(true);
     const [showMobileFilters, setShowMobileFilters] = useState(false);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     // Lock body scroll when mobile filters are open
     useEffect(() => {
@@ -24,6 +25,38 @@ function ProductsContent() {
             document.body.style.overflow = '';
         };
     }, [showMobileFilters]);
+
+    // Prevent scroll with readonly trick - browser won't scroll readonly inputs
+    useEffect(() => {
+        const input = searchInputRef.current;
+        if (!input) return;
+
+        // Make readonly initially to prevent scroll on focus
+        input.setAttribute('readonly', 'readonly');
+
+        const handleClick = () => {
+            // Remove readonly on click so user can type
+            input.removeAttribute('readonly');
+
+            // Focus it manually without letting browser scroll
+            setTimeout(() => {
+                input.focus();
+            }, 100);
+        };
+
+        const handleBlur = () => {
+            // Make readonly again when not focused
+            input.setAttribute('readonly', 'readonly');
+        };
+
+        input.addEventListener('click', handleClick);
+        input.addEventListener('blur', handleBlur);
+
+        return () => {
+            input.removeEventListener('click', handleClick);
+            input.removeEventListener('blur', handleBlur);
+        };
+    }, []);
 
     const [filters, setFilters] = useState<{
         category: string;
@@ -77,6 +110,10 @@ function ProductsContent() {
             data.sort((a, b) => Number(a.Price) - Number(b.Price));
         } else if (filters.sort === 'price_desc') {
             data.sort((a, b) => Number(b.Price) - Number(a.Price));
+        } else if (filters.sort === 'name_asc') {
+            data.sort((a, b) => a.ProductName.localeCompare(b.ProductName));
+        } else if (filters.sort === 'name_desc') {
+            data.sort((a, b) => b.ProductName.localeCompare(a.ProductName));
         }
 
         setProducts(data);
@@ -154,6 +191,7 @@ function ProductsContent() {
                         handleFilterChange={handleFilterChange}
                         handleMultiSelect={handleMultiSelect}
                         brands={BRANDS}
+                        hideSearch={false}
                     />
                 </aside>
 
@@ -181,6 +219,7 @@ function ProductsContent() {
                                 handleFilterChange={handleFilterChange}
                                 handleMultiSelect={handleMultiSelect}
                                 brands={BRANDS}
+                                hideSearch={true}
                             />
                             <button
                                 className="mobile-filter-toggle"
@@ -200,6 +239,7 @@ function ProductsContent() {
                         <div className="products-controls">
                             {/* Mobile Search - shown only on mobile */}
                             <input
+                                ref={searchInputRef}
                                 type="text"
                                 className="mobile-search-input mobile-only"
                                 placeholder="Search..."
@@ -214,6 +254,8 @@ function ProductsContent() {
                                 <option value="newest">Newest Arrivals</option>
                                 <option value="price_asc">Price: Low to High</option>
                                 <option value="price_desc">Price: High to Low</option>
+                                <option value="name_asc">Name: A-Z</option>
+                                <option value="name_desc">Name: Z-A</option>
                             </select>
                         </div>
                     </div>
@@ -227,7 +269,7 @@ function ProductsContent() {
                             <p>No products found. Try adjusting your filters.</p>
                         </div>
                     ) : (
-                        <div className="grid grid-4" style={{ gap: '24px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
                             {products.map((product) => (
                                 <ProductCard key={product.ProductID} product={product} />
                             ))}
@@ -239,20 +281,22 @@ function ProductsContent() {
     );
 }
 
-const FilterContent = ({ filters, handleFilterChange, handleMultiSelect, brands }: any) => (
+const FilterContent = ({ filters, handleFilterChange, handleMultiSelect, brands, hideSearch }: any) => (
     <>
-        {/* Search */}
-        <div className="filter-group">
-            <h4>SEARCH</h4>
-            <input
-                type="text"
-                className="form-input"
-                placeholder="Search..."
-                value={filters.search}
-                onChange={(e) => handleFilterChange('search', e.target.value)}
-                style={{ border: '1px solid #d2d2d7', borderRadius: '12px', padding: '10px 12px', width: '100%' }}
-            />
-        </div>
+        {/* Search - hidden in mobile modal */}
+        {!hideSearch && (
+            <div className="filter-group">
+                <h4>SEARCH</h4>
+                <input
+                    type="text"
+                    className="form-input"
+                    placeholder="Search..."
+                    value={filters.search}
+                    onChange={(e) => handleFilterChange('search', e.target.value)}
+                    style={{ border: '1px solid #d2d2d7', borderRadius: '12px', padding: '10px 12px', width: '100%' }}
+                />
+            </div>
+        )}
 
         {/* Brand Filter */}
         <div className="filter-group">
