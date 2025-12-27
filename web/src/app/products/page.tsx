@@ -269,7 +269,7 @@ function ProductsContent() {
                             <p>No products found. Try adjusting your filters.</p>
                         </div>
                     ) : (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+                        <div className="grid grid-4" style={{ gap: '24px' }}>
                             {products.map((product) => (
                                 <ProductCard key={product.ProductID} product={product} />
                             ))}

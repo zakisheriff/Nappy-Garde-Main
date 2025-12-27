@@ -116,14 +116,7 @@ export default function ProductDetail() {
                         <h1 className="product-title">{product.ProductName}</h1>
 
                         <div className="product-meta">
-                            <div className="product-rating">
-                                <div className="stars">
-                                    {[...Array(5)].map((_, i) => (
-                                        <StarIcon key={i} />
-                                    ))}
-                                </div>
-                                <span className="review-count">(48 reviews)</span>
-                            </div>
+
                             <span className="product-price">LKR {Number(product.Price).toFixed(2)}</span>
                         </div>
                     </div>

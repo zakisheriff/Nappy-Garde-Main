@@ -288,6 +288,28 @@
     font-size: 16px;
 }
 
+/* Products Grid - Responsive */
+.products-grid-layout {
+    display: grid !important;
+    grid-template-columns: calc(25% - 18px) calc(25% - 18px) calc(25% - 18px) calc(25% - 18px) !important;
+    gap: 24px;
+    width: 100%;
+}
+
+/* Ensure product cards don't overflow in Safari */
+.products-grid-layout>* {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Mobile: 2 columns */
+@media (max-width: 768px) {
+    .products-grid-layout {
+        grid-template-columns: calc(50% - 8px) calc(50% - 8px) !important;
+        gap: 16px;
+    }
+}
+
 
 /* Mobile Filter Styles */
 .mobile-filter-toggle {
@@ -381,11 +403,6 @@
         width: auto;
         min-width: 130px;
         flex-shrink: 0;
-    }
-
-    /* Hide search from filter modal on mobile - it's already in the main view */
-    .mobile-filters-content .filter-group:first-of-type {
-        display: none !important;
     }
 
     /* Mobile Toggle Button */
