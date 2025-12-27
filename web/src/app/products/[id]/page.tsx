@@ -182,17 +182,6 @@ export default function ProductDetail() {
                             {stock === 0 ? 'Out of Stock' : adding ? 'Adding...' : 'Add to Bag'}
                         </button>
                     </div>
-
-                    <div className="delivery-info">
-                        <div className="info-item">
-                            <span className="icon"><TruckIcon /></span>
-                            <span>Free shipping on orders over LKR 5000</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="icon"><ReturnIcon /></span>
-                            <span>30-day money-back guarantee</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
