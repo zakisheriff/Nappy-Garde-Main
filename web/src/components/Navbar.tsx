@@ -2,16 +2,29 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
     const { cartCount } = useCart();
     const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Determine if a link is active
+    const isActive = (path: string) => {
+        if (path === '/' && pathname === '/') return true;
+        if (path === '/products') return pathname === '/products' && !searchParams.get('category');
+        if (path.includes('?category=')) {
+            const category = path.split('category=')[1];
+            return pathname === '/products' && searchParams.get('category') === category;
+        }
+        return false;
+    };
 
     // Lock body scroll when mobile menu is open
     useEffect(() => {
@@ -53,13 +66,13 @@ const Navbar = () => {
 
                         {/* Desktop Navigation */}
                         <div className="navbar-links">
-                            <Link href="/" className="nav-link">Home</Link>
-                            <Link href="/products" className="nav-link">All Products</Link>
-                            <Link href="/products?category=Diapers" className="nav-link">Diapers & Pants</Link>
-                            <Link href="/products?category=Wipes" className="nav-link">Wet Wipes</Link>
-                            <Link href="/products?category=Skincare" className="nav-link">Bath & Skincare</Link>
-                            <Link href="/products?category=Clothing" className="nav-link">Clothing</Link>
-                            <Link href="/products?category=Toys" className="nav-link">Toys</Link>
+                            <Link href="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+                            <Link href="/products" className={`nav-link ${isActive('/products') ? 'active' : ''}`}>All Products</Link>
+                            <Link href="/products?category=Diapers" className={`nav-link ${isActive('/products?category=Diapers') ? 'active' : ''}`}>Diapers & Pants</Link>
+                            <Link href="/products?category=Wipes" className={`nav-link ${isActive('/products?category=Wipes') ? 'active' : ''}`}>Wet Wipes</Link>
+                            <Link href="/products?category=Skincare" className={`nav-link ${isActive('/products?category=Skincare') ? 'active' : ''}`}>Bath & Skincare</Link>
+                            <Link href="/products?category=Clothing" className={`nav-link ${isActive('/products?category=Clothing') ? 'active' : ''}`}>Clothing</Link>
+                            <Link href="/products?category=Toys" className={`nav-link ${isActive('/products?category=Toys') ? 'active' : ''}`}>Toys</Link>
                         </div>
 
                         {/* Right Side Actions */}

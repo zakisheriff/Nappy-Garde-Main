@@ -237,16 +237,20 @@ p {
 }
 
 /* New Year Theme Buttons */
+/* New Year Theme Buttons */
 .btn-gold {
-  background-color: #D4AF37 !important;
-  color: #000000 !important;
+  background: linear-gradient(135deg, #FCD34D 0%, #D4AF37 100%) !important;
+  /* Premium Gradient */
+  color: #1D1D1F !important;
   border: none;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
 .btn-gold:hover {
-  background-color: #FCD34D !important;
+  background: linear-gradient(135deg, #FFE175 0%, #E6C25A 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
 }
 
 .btn-glass-gold {
@@ -924,20 +928,29 @@ p {
   }
 
   .hero-main-image-wrapper {
-    height: 280px !important;
-    /* Even Smaller container */
+    height: auto !important;
+    /* Allow height to adjust */
     width: 100% !important;
-    overflow: hidden !important;
+    display: flex !important;
+    justify-content: center !important;
+    overflow: visible !important;
+    /* Allow rounded corners to show */
   }
 
   .hero-main-image {
     position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
+    width: 90% !important;
+    /* Inset slightly */
+    height: auto !important;
+    /* Aspect ratio drives height */
+    object-fit: cover !important;
+    /* Ensure fill */
     top: auto !important;
     left: auto !important;
     transform: none !important;
+    border-radius: 40px !important;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15) !important;
+    margin-top: 10px !important;
   }
 
   .hero-content-left {

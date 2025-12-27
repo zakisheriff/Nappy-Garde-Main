@@ -280,7 +280,7 @@
     padding: 16px 40px;
     font-size: 17px;
     font-weight: 600;
-    background: #1d1d1f;
+    background: #D4AF37;
     color: #ffffff;
     border-radius: 100px;
     text-decoration: none;
@@ -288,7 +288,8 @@
 }
 
 .why-cta-btn:hover {
-    background: #333;
+    background: #ffffff;
+    color: #D4AF37;
 }
 
 /* Mobile responsiveness */
