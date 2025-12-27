@@ -5,7 +5,7 @@ import { sendWhatsAppNotification } from '../whatsapp/route';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { customer, items, total, promoCode } = body;
+        const { customer, items, total, promoCode, deliveryCharge } = body;
 
         // Construct order object
         const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
             District: customer.district,
             ProductsOrdered: items.map((i: any) => `${i.ProductName} (x${i.quantity})`).join('\n'),
             Total: total,
+            DeliveryCharge: deliveryCharge,
             Date: date,
         };
 
@@ -49,6 +50,7 @@ export async function POST(request: Request) {
                 address: customer.address,
                 items: orderData.ProductsOrdered,
                 total,
+                deliveryCharge,
             }).catch(err => console.error('WhatsApp notification failed:', err));
 
             return NextResponse.json({ success: true, orderId });

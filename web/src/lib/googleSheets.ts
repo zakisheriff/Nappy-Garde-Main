@@ -53,6 +53,7 @@ export async function addOrder(order: any) {
       District: order.District,
       ProductsOrdered: order.ProductsOrdered,
       Total: order.Total,
+      DeliveryCharge: order.DeliveryCharge,
       Date: order.Date,
       Status: 'Pending', // Default status
     });

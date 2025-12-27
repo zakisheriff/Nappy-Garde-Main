@@ -56,7 +56,7 @@ export default function CartPage() {
                 <div className="empty-cart-container">
                     <div className="empty-icon"><BagIcon /></div>
                     <h2>Your bag is empty.</h2>
-                    <p>Free delivery and free returns.</p>
+                    <p>Calculated at checkout</p>
                     <Link href="/products" className="btn btn-primary btn-large">Continue Shopping</Link>
                 </div>
 
@@ -79,7 +79,7 @@ export default function CartPage() {
         <div className="cart-page page">
             <div className="container-wide">
                 <h1 className="cart-title">Review your bag.</h1>
-                <p className="cart-subtitle">Free delivery and free returns.</p>
+                <p className="cart-subtitle">Calculated at checkout.</p>
 
                 <div className="cart-layout">
                     {/* Cart Items List */}
@@ -118,8 +118,8 @@ export default function CartPage() {
                                 <span>LKR {total.toFixed(2)}</span>
                             </div>
                             <div className="summary-row">
-                                <span>Estimated Shipping</span>
-                                <span>Free</span>
+                                <span>Shipping</span>
+                                <span>Calculated at checkout</span>
                             </div>
                             <div className="summary-row">
                                 <span>Estimated Tax</span>

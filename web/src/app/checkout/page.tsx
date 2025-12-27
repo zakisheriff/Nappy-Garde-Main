@@ -24,6 +24,8 @@ export default function CheckoutPage() {
         address: '',
         district: '',
     });
+    const [deliveryCharge, setDeliveryCharge] = useState(0);
+    const [deliveryNote, setDeliveryNote] = useState('');
 
     // Sri Lankan Districts
     const districts = [
@@ -65,6 +67,20 @@ export default function CheckoutPage() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+
+        if (e.target.name === 'district') {
+            const selectedDistrict = e.target.value;
+            if (selectedDistrict === 'Colombo') {
+                setDeliveryCharge(300);
+                setDeliveryNote('');
+            } else if (selectedDistrict === '') {
+                setDeliveryCharge(0);
+                setDeliveryNote('');
+            } else {
+                setDeliveryCharge(500);
+                setDeliveryNote('(Delivery: LKR 400 - 500)');
+            }
+        }
 
         // Anti-Fraud: Clear discount if details are changed after applying
         if (discount > 0) {
@@ -133,7 +149,7 @@ export default function CheckoutPage() {
         e.preventDefault();
         setLoading(true);
 
-        const finalTotal = total - discount;
+        const finalTotal = total - discount + deliveryCharge;
 
         try {
             // 1. Save to Google Sheet via API
@@ -145,7 +161,8 @@ export default function CheckoutPage() {
                     items: cartItems,
                     total: finalTotal,
                     promoCode: discount > 0 ? promoCode : '',
-                    discount: discount
+                    discount: discount,
+                    deliveryCharge: deliveryCharge
                 }),
             });
 
@@ -158,6 +175,10 @@ export default function CheckoutPage() {
 
                 if (discount > 0) {
                     message += `%0a%0a*Subtotal:* LKR ${total.toFixed(2)}%0a*Discount:* -LKR ${discount.toFixed(2)} (${promoCode})`;
+                }
+
+                if (deliveryCharge > 0) {
+                    message += `%0a*Delivery:* LKR ${deliveryCharge.toFixed(2)}`;
                 }
 
                 message += `%0a*Total:* LKR ${finalTotal.toFixed(2)}%0a%0aPlease confirm my order.`;
@@ -338,9 +359,17 @@ export default function CheckoutPage() {
                             </div>
                         )}
 
+                        <div className="summary-row">
+                            <span>Delivery</span>
+                            <div style={{ textAlign: 'right' }}>
+                                <span>LKR {deliveryCharge.toFixed(2)}</span>
+                                {deliveryNote && <div style={{ fontSize: '10px', color: '#86868b' }}>{deliveryNote}</div>}
+                            </div>
+                        </div>
+
                         <div className="summary-row total">
                             <span>Total</span>
-                            <span>LKR {(total - discount).toFixed(2)}</span>
+                            <span>LKR {(total - discount + deliveryCharge).toFixed(2)}</span>
                         </div>
 
                         <button
@@ -349,7 +378,7 @@ export default function CheckoutPage() {
                             className="place-order-btn"
                             disabled={loading}
                         >
-                            {loading ? 'Processing...' : 'Place Order on WhatsApp'}
+                            {loading ? 'Processing...' : `Place Order (LKR ${(total - discount + deliveryCharge).toFixed(2)}) on WhatsApp`}
                         </button>
 
                     </div>

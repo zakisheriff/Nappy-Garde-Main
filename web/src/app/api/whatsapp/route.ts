@@ -20,6 +20,7 @@ interface OrderNotification {
     address: string;
     items: string;
     total: number;
+    deliveryCharge?: number;
 }
 
 export async function sendWhatsAppNotification(order: OrderNotification): Promise<boolean> {
@@ -43,6 +44,7 @@ export async function sendWhatsAppNotification(order: OrderNotification): Promis
 ${order.items}
 
 💰 *Total: LKR ${order.total.toFixed(2)}*
+${order.deliveryCharge ? `(Includes Delivery: LKR ${order.deliveryCharge.toFixed(2)})` : ''}
 
 📅 ${new Date().toLocaleString()}`;
 
