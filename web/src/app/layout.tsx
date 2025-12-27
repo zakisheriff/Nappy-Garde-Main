@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import "./focus-fix.css";
 import { CartProvider } from "@/context/CartContext";
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body className="antialiased">
         <CartProvider>
           <Fireworks />
-          <Navbar />
+          <Suspense fallback={<div className="h-20 bg-white shadow-sm" />}>
+            <Navbar />
+          </Suspense>
           <main className="main-content min-h-screen">
             {children}
           </main>
