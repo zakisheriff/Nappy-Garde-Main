@@ -37,6 +37,7 @@ interface Product {
     Stock: string | number;
     ImageURL?: string;
     Description?: string;
+    Benefits?: string;
 }
 
 export default function ProductDetail() {
@@ -123,12 +124,17 @@ export default function ProductDetail() {
 
                     <div className="product-description">
                         <p>{product.Description || 'No description available.'}</p>
-                        <ul className="feature-list">
-                            <li>Hypoallergenic & Dermatologist Tested</li>
-                            <li>12-hour leak protection</li>
-                            <li>Wetness indicator</li>
-                            <li>Ultra-soft breathable materials</li>
-                        </ul>
+                        {product.Benefits ? (
+                            <ul className="feature-list">
+                                {product.Benefits.split(/[\n,]/).map((benefit, index) => (
+                                    benefit.trim() && <li key={index}>{benefit.trim()}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <ul className="feature-list">
+                                {/* Fallback or empty if no benefits provided in sheet */}
+                            </ul>
+                        )}
                     </div>
 
                     <div className="purchase-options">

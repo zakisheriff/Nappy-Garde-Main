@@ -29,6 +29,7 @@ export async function getProducts() {
     ImageURL: row.get('ImageURL'),
     category: row.get('category'),
     brand: row.get('Brand'),
+    Benefits: row.get('Benefits'),
   }));
 }
 
