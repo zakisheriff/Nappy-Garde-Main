@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { addOrder, recordPromoUsage } from '@/lib/googleSheets';
+import { addOrder, recordPromoUsage, checkPromoUsage } from '@/lib/googleSheets';
 import { sendWhatsAppNotification } from '../whatsapp/route';
 
 export async function POST(request: Request) {
