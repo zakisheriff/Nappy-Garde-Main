@@ -1,13 +1,15 @@
-/* Apple.com-Inspired Navbar */
+/* Apple.com-Inspired Navbar - White & Gold Theme */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(251, 251, 253, 0.8);
+    background: rgba(251, 251, 253, 0.85);
+    /* Light glass */
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle border */
     z-index: 10000;
     transition: all 0.3s ease;
 }
@@ -97,7 +99,10 @@
 }
 
 .nav-link:hover {
-    opacity: 0.7;
+    color: #D4AF37;
+    /* Gold on hover */
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 /* Actions */
@@ -115,7 +120,7 @@
     align-items: center;
     justify-content: center;
     color: var(--text-primary);
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
     background: none;
     border: none;
@@ -123,7 +128,8 @@
 }
 
 .nav-icon-btn:hover {
-    opacity: 0.7;
+    color: #D4AF37;
+    opacity: 1;
 }
 
 .navbar.menu-open .nav-icon-btn:not(.hamburger) {
@@ -135,8 +141,10 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: var(--secondary-red);
-    color: white;
+    background-color: #D4AF37;
+    /* Gold badge */
+    color: #000000;
+    /* Black text */
     font-size: 9px;
     font-weight: 700;
     min-width: 16px;
@@ -220,7 +228,7 @@
 }
 
 .mobile-menu-backdrop.active {
-    background-color: rgba(0, 0, 0, 0.48);
+    background-color: rgba(0, 0, 0, 0.6);
     pointer-events: auto;
 }
 
@@ -231,6 +239,7 @@
     right: 0;
     bottom: 0;
     background: #fbfbfd;
+    /* Light Background */
     z-index: 9999;
     transform: translateY(-100%);
     transition: transform 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);

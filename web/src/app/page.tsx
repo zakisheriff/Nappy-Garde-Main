@@ -70,7 +70,7 @@ const Home = () => {
     else if (w <= 8) setSizeResult('Small');
     else if (w <= 11) setSizeResult('Medium');
     else if (w <= 14) setSizeResult('Large');
-    else if (w <= 17) setSizeResult('XL');
+    else if (w <= 17) setSizeResult('XXL');
     else setSizeResult('XXL');
   };
 
@@ -85,34 +85,32 @@ const Home = () => {
     <div className="home-page">
       {/* 1. Hero Section */}
       <section className="hero-section">
-        <div className="hero-aurora-1"></div>
-        <div className="hero-aurora-2"></div>
+        <div className="aurora-gold-1"></div>
+        <div className="aurora-gold-2"></div>
 
         <div className="hero-container-split">
           <div className="hero-content-left">
             <h1 className="hero-headline-large">
               Nappy Garde
             </h1>
+            <h2 className="hero-subheadline-seasonal">
+              New Year, <br /> New Beginnings
+            </h2>
             <p className="hero-subtext-large">
-              Premium Diapers & Baby Care.
+              Start 2026 with premium care for your little one. <br className="hidden md:block" />
+              Celebrate with our exclusive New Year collection.
             </p>
 
             <div className="hero-actions-left">
-              <Link href="/products" className="btn btn-primary btn-xl btn-blue">
-                Shop All Essentials
+              <Link href="/products" className="btn btn-primary btn-xl btn-gold">
+                Shop 2026 Essentials
               </Link>
               <button
                 onClick={() => setShowSizeModal(true)}
-                className="btn btn-primary btn-xl btn-red"
+                className="btn btn-xl btn-glass-gold"
               >
-                Find Size Guide
+                Contact Us
               </button>
-            </div>
-
-            <div className="hero-badges-row">
-              <div className="badge-pill"><FastForward size={14} /> Fast Delivery</div>
-              <div className="badge-pill"><ShieldCheck size={14} /> Authentic Brands</div>
-              <div className="badge-pill"><Sparkles size={14} /> Premium Quality</div>
             </div>
           </div>
 
@@ -120,13 +118,13 @@ const Home = () => {
           <div className="hero-visuals-right">
             <div className="hero-main-image-wrapper">
               <img
-                src="https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=2787&auto=format&fit=crop"
-                alt="Happy Baby"
+                src="/images/ny_hero.png"
+                alt="Happy Baby New Year 2026"
                 className="hero-main-image"
               />
               <img
-                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop"
-                alt="Baby Products"
+                src="/images/ny_collage.jpeg"
+                alt="New Year Collection"
                 className="hero-collage-img"
               />
             </div>
@@ -135,7 +133,7 @@ const Home = () => {
       </section>
 
       {/* 2. New Arrivals */}
-      <section className="section-container">
+      <section className="section-container new-arrivals-gold">
         <h2 className="section-headline">New Arrivals for Your Baby</h2>
         <div className="products-grid bestsellers-grid">
           {loading ? (
@@ -166,24 +164,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 5. Shop by Baby Stage */}
-      <section className="section-container shop-by-stage">
-        <h2 className="section-headline text-3xl font-bold mb-8 text-center">Find the Perfect Fit</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {['Newborn', 'Infant', 'Toddler'].map((stage, idx) => (
-            <Link href={`/products?category=${stage}`} key={stage} className="stage-card">
-              <div className="stage-bg"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-${idx === 0 ? '1544126592-807ade215a0b' : idx === 1 ? '1519689680058-324335c77eba' : '1519340241574-2cec6aef0c01'}?auto=format&fit=crop&w=800&q=80')` }}>
-              </div>
-              <div className="stage-overlay"></div>
-              <div className="stage-content">
-                <div className="stage-title">{stage} Care</div>
-                <div className="stage-subtitle">Essentials</div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section >
 
       {/* 6. Why Choose Nappy Garde */}
       <section className="why-choose-section">
@@ -194,7 +174,7 @@ const Home = () => {
           <div className="why-choose-grid">
             <div className="why-card">
               <div className="why-icon">
-                <ShieldCheck size={32} />
+                <ShieldCheck size={32} color="#D4AF37" />
               </div>
               <h3 className="why-card-title">100% Authentic</h3>
               <p className="why-card-text">Every product is sourced directly from authorized distributors.</p>
@@ -202,7 +182,7 @@ const Home = () => {
 
             <div className="why-card">
               <div className="why-icon">
-                <FastForward size={32} />
+                <FastForward size={32} color="#D4AF37" />
               </div>
               <h3 className="why-card-title">Same Day Delivery</h3>
               <p className="why-card-text">Order before 2 PM and receive your essentials the same day.</p>
@@ -210,7 +190,7 @@ const Home = () => {
 
             <div className="why-card">
               <div className="why-icon">
-                <HeartHandshake size={32} />
+                <HeartHandshake size={32} color="#D4AF37" />
               </div>
               <h3 className="why-card-title">Expert Support</h3>
               <p className="why-card-text">Our team of parents is here to help you choose the right products.</p>

@@ -198,7 +198,8 @@
 /* WHY CHOOSE NAPPY GARDE */
 /* ============================================= */
 .why-choose-section {
-    background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #FFFCF5 0%, #FFFFFF 100%);
+    /* Warm Ivory to White */
     padding: 80px 20px;
 }
 
@@ -233,24 +234,28 @@
     padding: 32px 24px;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .why-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+    /* Gold glow */
+    border-color: #D4AF37;
 }
 
 .why-icon {
     width: 64px;
     height: 64px;
-    background: #f0f7ff;
+    background: rgba(212, 175, 55, 0.05);
+    /* Very light gold */
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    color: #0071e3;
+    color: #D4AF37;
 }
 
 .why-card-title {
@@ -513,9 +518,11 @@
 /* 1. Hero Section */
 /* 1. Hero Section */
 /* 1. New Split Hero Section */
+/* 1. New Split Hero Section */
 .hero-section {
     position: relative;
-    background-color: #f5f5f7;
+    background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 60%, #FFFFFF 100%);
+    /* Stronger Gold Tint Top */
     overflow: hidden;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -523,29 +530,35 @@
     width: 100%;
     margin: 12px auto;
     border-radius: 32px;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+    /* Stronger glow */
 }
 
-/* AURORA BACKGROUND */
-.hero-aurora-1 {
+/* AURORA BACKGROUND - Vibrant Gold/Warm - Cache Bust */
+.aurora-gold-1 {
     position: absolute;
-    top: -20%;
+    top: -10%;
+    /* Move down slightly */
     left: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0, 113, 227, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(80px);
+    width: 700px;
+    /* Larger */
+    height: 700px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(255, 252, 245, 0) 70%);
+    /* Higher Opacity */
+    filter: blur(60px);
+    /* Less blur for more color */
     z-index: 0;
     animation: moveAurora 15s infinite alternate;
 }
 
-.hero-aurora-2 {
+.aurora-gold-2 {
     position: absolute;
     bottom: -10%;
     right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(80px);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(255, 252, 245, 0) 70%);
+    filter: blur(60px);
     z-index: 0;
     animation: moveAurora 12s infinite alternate-reverse;
 }
@@ -578,7 +591,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #0071e3, #4facfe);
+    background: linear-gradient(90deg, #D4AF37, #B45309);
+    /* Gold to Bronze */
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -589,15 +603,18 @@
     font-size: 72px;
     line-height: 1.05;
     font-weight: 800;
-    color: #1d1d1f;
+    color: #1D1D1F;
+    /* Dark text again */
     letter-spacing: -2px;
     margin-bottom: 24px;
+    /* Removed strong text shadow for cleaner look */
 }
 
 .hero-subtext-large {
     font-size: 20px;
     line-height: 1.5;
-    color: #6e6e73;
+    color: #424245;
+    /* Dark grey */
     margin-bottom: 40px;
     max-width: 500px;
 }
@@ -620,22 +637,54 @@
     transition: all 0.3s ease;
 }
 
+/* Renaming to avoid conflicts */
+.btn-gold {
+    background: #D4AF37 !important;
+    color: #000000 !important;
+    border: none !important;
+}
+
+.btn-gold:hover {
+    background: #FCD34D !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
+    transform: translateY(-2px);
+}
+
+.btn-glass-gold {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #D4AF37 !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    backdrop-filter: blur(10px);
+}
+
+.btn-glass-gold:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #D4AF37 !important;
+    color: #FCD34D !important;
+}
+
+/* Legacy overrides just in case */
 .btn-blue {
-    background: #0066cc;
-    color: #ffffff;
+    background: #D4AF37 !important;
+    color: #000000 !important;
 }
 
 .btn-blue:hover {
-    background: #0052a3;
+    background: #FCD34D !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
 }
 
 .btn-red {
-    background: #cb1b1b;
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #D4AF37 !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    backdrop-filter: blur(10px);
 }
 
 .btn-red:hover {
-    background: #a31616;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #D4AF37 !important;
+    color: #FCD34D !important;
 }
 
 /* Home page top spacing */
@@ -741,7 +790,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 40px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     transform: rotate(-3deg);
     transition: transform 0.5s ease;
     position: absolute;
@@ -1771,9 +1819,12 @@
     }
 
     /* FIX: Hide Aurora blobs completely on small screens to remove risk */
-    .hero-aurora-1,
-    .hero-aurora-2 {
-        display: none !important;
+    /* FIX: Ensure Auroras SHOW on mobile now */
+    .aurora-gold-1,
+    .aurora-gold-2 {
+        display: block !important;
+        opacity: 0.6;
+        /* Slight reduction for text readability */
     }
 
     /* Clip Hero Visuals strictly */

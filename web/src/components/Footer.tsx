@@ -22,8 +22,9 @@ const Footer = () => {
                         <Link href="/products" className="footer-link">All Products</Link>
                         <Link href="/products?category=Diapers" className="footer-link">Diapers & Pants</Link>
                         <Link href="/products?category=Wipes" className="footer-link">Wet Wipes</Link>
-                        <Link href="/products?category=Skincare" className="footer-link">Skincare</Link>
-                        <Link href="/products?category=Feeding" className="footer-link">Feeding</Link>
+                        <Link href="/products?category=Skincare" className="footer-link">Bath & Skincare</Link>
+                        <Link href="/products?category=Clothing" className="footer-link">Clothing</Link>
+                        <Link href="/products?category=Toys" className="footer-link">Toys & Gear</Link>
                     </div>
 
                     {/* Support */}
@@ -31,16 +32,8 @@ const Footer = () => {
                         <h4 className="footer-heading">Support</h4>
                         <a href="#" className="footer-link">Contact Us</a>
                         <a href="#" className="footer-link">FAQs</a>
-                        <a href="#" className="footer-link">Shipping Info</a>
-                        <a href="#" className="footer-link">Returns</a>
                     </div>
 
-                    {/* Account */}
-                    <div className="footer-section">
-                        <h4 className="footer-heading">Account</h4>
-                        <Link href="/cart" className="footer-link">Shopping Cart</Link>
-                        <a href="#" className="footer-link">Track Order</a>
-                    </div>
                 </div>
 
                 <div className="footer-bottom">

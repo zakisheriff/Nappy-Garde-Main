@@ -1,0 +1,100 @@
+/* Fireworks / Firecracker Animation */
+.fireworks-container {
+    position: fixed;
+    /* Fixed position for global overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* This might block touch if pointer-events fails */
+    pointer-events: none !important;
+    /* Force pass-through */
+    z-index: 9999;
+    /* Ensure it's above most content but below modals if needed */
+    overflow: hidden;
+}
+
+.firework {
+    position: absolute;
+    width: 6px;
+    /* Bigger dots */
+    height: 6px;
+    border-radius: 50%;
+    animation: explode 2s ease-out infinite;
+    opacity: 0;
+}
+
+/* Create different explosion patterns using box-shadow */
+.firework-1 {
+    top: 15%;
+    left: 15%;
+    animation-delay: 0s;
+    color: #D97706;
+    /* Strong Amber/Gold */
+    transform: scale(1.5);
+}
+
+.firework-2 {
+    top: 25%;
+    right: 15%;
+    animation-delay: 0.6s;
+    color: #D4AF37;
+    /* Gold */
+    transform: scale(1.2);
+}
+
+.firework-3 {
+    top: 10%;
+    left: 50%;
+    animation-delay: 1.2s;
+    color: #92400E;
+    /* Dark Bronze */
+    transform: scale(1.3);
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: 0 0 0 0 currentColor;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 0;
+        box-shadow:
+            -20px -20px 0 0 currentColor,
+            20px -20px 0 0 currentColor,
+            -20px 20px 0 0 currentColor,
+            20px 20px 0 0 currentColor,
+            0 -30px 0 0 currentColor,
+            0 30px 0 0 currentColor,
+            -30px 0 0 currentColor,
+            30px 0 0 currentColor;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+        box-shadow:
+            -40px -40px 0 -2px currentColor,
+            40px -40px 0 -2px currentColor,
+            -40px 40px 0 -2px currentColor,
+            40px 40px 0 -2px currentColor,
+            0 -60px 0 -2px currentColor,
+            0 60px 0 -2px currentColor,
+            -60px 0 0 -2px currentColor,
+            60px 0 0 -2px currentColor;
+    }
+}
+
+/* Add sparkles relative to the burst */
+.sparkle-burst {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}

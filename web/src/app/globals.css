@@ -24,9 +24,9 @@ body {
   line-height: 1.5;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  /* Removed overflow-x: hidden to prevent mobile scroll lock if body height < 100vh */
 }
 
 img {
@@ -55,19 +55,36 @@ select {
 
 /* ==================== CSS Variables ==================== */
 :root {
-  /* Apple-inspired Color Palette */
-  --primary-blue: #0071E3;
-  --secondary-red: #FA233B;
-  --text-primary: #1D1D1F;
-  --text-secondary: #6E6E73;
-  --bg-primary: #F5F5F7;
-  --bg-white: #FFFFFF;
-  --border-color: #D2D2D7;
-  --hover-bg: #E8E8ED;
+  /* New Year 2026 - White & Gold Theme */
+  --primary-blue: #D4AF37;
+  /* Gold Main */
+  --primary-gold: #D4AF37;
+  --primary-dark: #1D1D1F;
+  --secondary-red: #C5A028;
+  /* Darker Gold for hover */
 
-  /* Glassmorphic colors */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.3);
+  /* Backgrounds */
+  --bg-primary: #FFFCF5;
+  /* Warm Ivory/Cream */
+  --bg-secondary: #FFFFFF;
+  /* Pure White */
+  --bg-white: #FFFFFF;
+  --bg-paper: #FFFFFF;
+
+  /* Text */
+  --text-primary: #1D1D1F;
+  /* Dark Slate/Black */
+  --text-secondary: #6E6E73;
+  /* Grey */
+  --text-gold: #D4AF37;
+
+  --border-color: #D2D2D7;
+  --hover-bg: #F5F5F7;
+
+  /* Glassmorphic colors - Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(212, 175, 55, 0.2);
+  /* Gold trace */
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -209,13 +226,41 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--primary-blue);
-  color: white;
+  background-color: #D4AF37;
+  color: #000000;
+  /* Dark Text for Gold Button */
 }
 
 .btn-secondary {
   background-color: var(--secondary-red);
   color: white;
+}
+
+/* New Year Theme Buttons */
+.btn-gold {
+  background-color: #D4AF37 !important;
+  color: #000000 !important;
+  border: none;
+}
+
+.btn-gold:hover {
+  background-color: #FCD34D !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-glass-gold {
+  background: rgba(255, 255, 255, 0.8) !important;
+  /* Lighter/White background for visibility */
+  border: 1px solid #D4AF37 !important;
+  color: #D4AF37 !important;
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass-gold:hover {
+  background: #D4AF37 !important;
+  color: #000000 !important;
+  border-color: #D4AF37 !important;
 }
 
 .btn-outline {
@@ -548,10 +593,12 @@ p {
   width: 100%;
   padding-top: 100%;
   /* 1:1 Aspect Ratio */
-  background-color: #f5f5f7;
+  background: linear-gradient(135deg, #FFFCF5 0%, #FFF9E5 100%);
+  /* Warm Gold Tint */
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .product-image {
@@ -717,4 +764,273 @@ p {
     height: 32px;
     min-height: 32px;
   }
+}
+
+/* ============================================= */
+/* GLOBAL NEW YEAR HERO STYLES (MOVED FROM HOME.CSS) */
+/* ============================================= */
+
+/* 1. Hero Section - FORCED GLOBAL */
+/* 1. Hero Section - FORCED GLOBAL */
+.hero-section {
+  position: relative;
+  background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 60%, #FFFFFF 100%) !important;
+  overflow: hidden;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+/* DESKTOP SPECIFIC: Full Screen & Centered */
+@media (min-width: 769px) {
+  .hero-section {
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    min-height: 95vh;
+    /* Take screen completely */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-container-split {
+    max-width: 1400px;
+    /* Keep content contained internally */
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+.hero-brand-tag {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #D4AF37;
+  /* Gold */
+  margin-bottom: 16px;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.hero-subheadline-seasonal {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: #1D1D1F !important;
+  margin-bottom: 16px !important;
+  line-height: 1.2 !important;
+  display: block !important;
+}
+
+/* Mobile override for subheadline */
+@media (max-width: 768px) {
+  .hero-subheadline-seasonal {
+    font-size: 20px !important;
+    /* Smaller on mobile */
+    margin-bottom: 12px !important;
+  }
+}
+
+/* AURORA ANIMATION KEYFRAMES */
+@keyframes moveAurora {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-20px, 20px) scale(1);
+  }
+}
+
+/* AURORA BACKGROUND - Vibrant Gold/Warm */
+.aurora-gold-1 {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(255, 252, 245, 0) 70%);
+  filter: blur(60px);
+  z-index: 0;
+  animation: moveAurora 15s infinite alternate;
+  display: block !important;
+  /* Force visible on mobile */
+}
+
+.aurora-gold-2 {
+  position: absolute;
+  bottom: -10%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(255, 252, 245, 0) 70%);
+  filter: blur(60px);
+  z-index: 0;
+  animation: moveAurora 12s infinite alternate-reverse;
+  display: block !important;
+  /* Force visible on mobile */
+}
+
+/* Mobile Overrides for Auroras and Hero Image */
+/* Mobile Overrides for Auroras and Hero Image */
+@media (max-width: 768px) {
+  .hero-section {
+    border-radius: 0 0 24px 24px;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+    /* Critical: No scroll */
+    height: auto !important;
+    /* Allow content to fit */
+    max-height: 95vh !important;
+    /* Constraint total height */
+  }
+
+  /* Force vertical stack and constrain width */
+  .hero-container-split {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    padding: 20px 10px 0 10px !important;
+  }
+
+  .aurora-gold-1,
+  .aurora-gold-2 {
+    opacity: 0.5;
+  }
+
+  /* Bring Image Up on Mobile */
+  .hero-visuals-right {
+    display: block !important;
+    width: 100% !important;
+    margin-top: -30px !important;
+    /* Adjusted for better fit */
+    margin-bottom: 0 !important;
+    transform: none !important;
+    /* Remove scale, use width */
+    position: relative;
+    z-index: 1;
+    overflow: hidden !important;
+  }
+
+  .hero-main-image-wrapper {
+    height: 280px !important;
+    /* Even Smaller container */
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .hero-main-image {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  .hero-content-left {
+    padding-bottom: 10px !important;
+    width: 100% !important;
+  }
+}
+
+/* ============================================= */
+/* WHY CHOOSE SECTION - GOLD THEME (GLOBAL) */
+/* ============================================= */
+.why-choose-section {
+  background: linear-gradient(180deg, #FFFCF5 0%, #FFF9E5 100%) !important;
+  padding: 80px 20px;
+}
+
+.why-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.05) !important;
+}
+
+.why-icon {
+  background: rgba(212, 175, 55, 0.1) !important;
+  /* Gold Tint */
+  color: #D4AF37 !important;
+  /* Gold Icon */
+}
+
+.why-icon svg {
+  color: #D4AF37 !important;
+  stroke: #D4AF37 !important;
+}
+
+.why-card-title {
+  color: #1D1D1F !important;
+}
+
+.why-choose-subtitle {
+  color: #8E7F5E !important;
+  /* Gold-Grey */
+}
+
+/* ============================================= */
+/* NEW ARRIVALS - GOLD THEME (GLOBAL) */
+/* ============================================= */
+.new-arrivals-gold {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF9E5 100%) !important;
+  /* Fade from White to Gold */
+  border-radius: 24px;
+  margin-top: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-shadow: none;
+}
+
+
+
+/* ============================================= */
+/* REVIEWS SECTION - GOLD THEME (GLOBAL) */
+/* ============================================= */
+.reviews-section {
+  background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 100%) !important;
+  /* Warm Gold Gradient */
+  padding: 80px 0;
+}
+
+.review-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.05) !important;
+  border-radius: 24px;
+}
+
+.stars {
+  color: #D4AF37 !important;
+  /* Gold Stars */
+}
+
+.review-author {
+  color: #D4AF37 !important;
+  /* Gold name */
+}
+
+.section-headline {
+  /* Removed conflicting black color */
+}
+
+/* FINAL HEADLINE OVERRIDES */
+/* Ensure these trigger last */
+.new-arrivals-gold .section-headline,
+.bestsellers-section .section-headline {
+  color: #D4AF37 !important;
+  /* Gold Headline for both */
+  font-weight: 700 !important;
 }
