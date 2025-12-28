@@ -7,9 +7,16 @@ import { toast } from 'sonner';
 import ProductCard from '@/components/ProductCard';
 import './ProductDetail.css';
 
-const StarIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="#f5a623">
+const StarIcon = ({ size = 18 }: { size?: number }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="#f5a623">
         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+);
+
+const ShieldIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
+        <polyline points="9 11 11 13 15 9" />
     </svg>
 );
 
@@ -20,13 +27,6 @@ const TruckIcon = () => (
         <path d="M16 16h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2" />
         <circle cx="5.5" cy="18.5" r="2.5" />
         <circle cx="18.5" cy="18.5" r="2.5" />
-    </svg>
-);
-
-const ReturnIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="9 14 4 9 9 4" />
-        <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
     </svg>
 );
 
@@ -51,7 +51,6 @@ export default function ProductDetail() {
     const [adding, setAdding] = useState(false);
 
     useEffect(() => {
-        // Reset state when navigating to a new product
         setLoading(true);
         setProduct(null);
         setQuantity(1);
@@ -63,7 +62,6 @@ export default function ProductDetail() {
                 const found = products.find((p: any) => p.ProductID === id);
                 setProduct(found || null);
 
-                // Get recommended products (excluding current product)
                 if (Array.isArray(products)) {
                     const available = products.filter((p: Product) => p.ProductID !== id);
                     const shuffled = available.sort(() => 0.5 - Math.random());
@@ -148,9 +146,7 @@ export default function ProductDetail() {
                                 ))}
                             </ul>
                         ) : (
-                            <ul className="feature-list">
-                                {/* Fallback or empty if no benefits provided in sheet */}
-                            </ul>
+                            <ul className="feature-list"></ul>
                         )}
                     </div>
 
@@ -182,19 +178,85 @@ export default function ProductDetail() {
                             {stock === 0 ? 'Out of Stock' : adding ? 'Adding...' : 'Add to Bag'}
                         </button>
                     </div>
+
+                    <div className="delivery-info">
+                        <div className="info-item">
+                            <span className="icon"><TruckIcon /></span>
+                            <span>Fast Islandwide Delivery (LKR 300 - 500)</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="icon"><ShieldIcon /></span>
+                            <span>100% Authentic & Genuine Products</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Recommended Products */}
-            {recommended.length > 0 && (
-                <div className="container-wide recommended-section">
-                    <h2 className="recommended-title">You Might Also Like</h2>
-                    <div className="recommended-grid">
-                        {recommended.map(product => (
-                            <ProductCard key={product.ProductID} product={product} />
-                        ))}
+            {/* Parent Reviews Marquee - Matching Home Page Structure Exactly */}
+            <section className="section-container reviews-section">
+                <h2 className="section-headline" style={{ textAlign: 'center' }}>Loved by Parents Like You</h2>
+                <div className="marquee-wrapper">
+                    <div className="marquee-content">
+                        {/* Original Set */}
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Super fast delivery! I ordered in the morning and got it by evening. Lifesaver for busy moms."</p>
+                            <p className="review-author">Ahmed Akram, Colombo</p>
+                        </div>
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Love the variety. I can buy different brands for day and night in one go. Excellent service from Nappy Garde."</p>
+                            <p className="review-author">Dhanushka de Silva, Kandy</p>
+                        </div>
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Genuine products at the best prices. Nappy Garde is my go-to for all baby essentials."</p>
+                            <p className="review-author">Samuel K, Galle</p>
+                        </div>
+                        {/* Duplicated for seamless loop */}
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Super fast delivery! I ordered in the morning and got it by evening. Lifesaver for busy moms."</p>
+                            <p className="review-author">Sarah Mohammad, Colombo</p>
+                        </div>
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Love the variety. I can buy different brands for day and night in one go. Excellent service from Nappy Garde."</p>
+                            <p className="review-author">Kumarasinghe M, Kandy</p>
+                        </div>
+                        <div className="review-card">
+                            <div className="stars">
+                                <StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} /><StarIcon size={16} />
+                            </div>
+                            <p className="review-text">"Genuine products at the best prices. Nappy Garde is my go-to for all baby essentials."</p>
+                            <p className="review-author">Rohan S, Galle</p>
+                        </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Recommended Products */}
+            {recommended.length > 0 && (
+                <section className="recommended-section">
+                    <div className="container-wide">
+                        <h2 className="recommended-title">You Might Also Like</h2>
+                        <div className="recommended-grid">
+                            {recommended.map(product => (
+                                <ProductCard key={product.ProductID} product={product} />
+                            ))}
+                        </div>
+                    </div>
+                </section>
             )}
         </div>
     );

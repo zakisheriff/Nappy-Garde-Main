@@ -1,7 +1,6 @@
 .product-detail-page {
     padding-top: 140px;
-    padding-bottom: 80px;
-    background: #fff;
+    background: var(--bg-primary);
     min-height: 100vh;
 }
 
@@ -265,6 +264,7 @@
     gap: 12px;
     padding-top: 24px;
     border-top: 1px solid #e5e5e5;
+    margin-top: 24px;
 }
 
 .info-item {
@@ -276,7 +276,91 @@
 }
 
 .info-item .icon {
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D4AF37;
+}
+
+/* Reviews Section Styles - Full Width Override */
+.reviews-section {
+    padding: 60px 0 !important;
+    overflow: hidden !important;
+    background: #FFFCF5 !important;
+    max-width: none !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+}
+
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: marqueeScroll 40s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.review-card {
+    background: #fff;
+    padding: 32px;
+    border-radius: 20px;
+    width: 350px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
+
+.review-card .stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 12px;
+}
+
+.review-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1d1d1f;
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.review-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: #D4AF37;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 @media (max-width: 900px) {
@@ -295,9 +379,10 @@
 /* RECOMMENDED PRODUCTS SECTION */
 /* ============================================= */
 .recommended-section {
-    margin-top: 48px !important;
-    padding-top: 48px !important;
-    border-top: 1px solid #d2d2d7;
+    padding: 80px 0;
+    background: var(--bg-primary);
+    /* Match the reviews section background */
+    width: 100%;
 }
 
 .recommended-title {

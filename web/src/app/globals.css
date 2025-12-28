@@ -1125,3 +1125,38 @@ p {
   /* Gold Headline for both */
   font-weight: 700 !important;
 }
+
+/* ============================================= */
+/* REVIEWS SECTION - FULL WIDTH OVERRIDE */
+/* Safari Compatibility Fix */
+/* ============================================= */
+.reviews-section {
+  padding: 60px 0 !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 50%, #FFF9E5 100%) !important;
+  /* Gold blend gradient */
+  max-width: none !important;
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+}
+
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Recommended Section - Full Width Gold Background */
+.recommended-section {
+  padding: 80px 0 !important;
+  background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 100%) !important;
+  /* Gold blend */
+  max-width: none !important;
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+}

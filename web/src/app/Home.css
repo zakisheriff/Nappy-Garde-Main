@@ -716,6 +716,8 @@
 /* Home page top spacing */
 .home-page {
     padding-top: 100px;
+    background: linear-gradient(180deg, #FFFCF5 0%, #FFF9E5 100%);
+    /* Gold theme background */
 }
 
 @media (max-width: 768px) {

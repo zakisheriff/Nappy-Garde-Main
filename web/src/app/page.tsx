@@ -94,7 +94,7 @@ const Home = () => {
               Nappy Garde
             </h1>
             <h2 className="hero-subheadline-seasonal">
-              New Year, <br /> New Beginnings
+              New Year, New Beginnings
             </h2>
             <p className="hero-subtext-large">
               Start 2026 with premium care for your little one. <br className="hidden md:block" />
