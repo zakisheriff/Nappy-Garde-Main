@@ -198,8 +198,8 @@
 /* WHY CHOOSE NAPPY GARDE */
 /* ============================================= */
 .why-choose-section {
-    background: linear-gradient(180deg, #FFFCF5 0%, #FFFFFF 100%);
-    /* Warm Ivory to White */
+    background: #FFFFFF;
+    /* Plain White */
     padding: 80px 20px;
 }
 
@@ -240,15 +240,15 @@
 
 .why-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
-    /* Gold glow */
-    border-color: #D4AF37;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    /* Grey shadow */
+    border-color: #d2d2d7;
 }
 
 .why-icon {
     width: 64px;
     height: 64px;
-    background: rgba(212, 175, 55, 0.05);
+    background: #f5f5f7;
     /* Very light gold */
     border-radius: 16px;
     display: flex;
@@ -546,46 +546,25 @@
 /* 1. New Split Hero Section */
 .hero-section {
     position: relative;
-    background: linear-gradient(180deg, #FFF9E5 0%, #FFFCF5 60%, #FFFFFF 100%);
-    /* Stronger Gold Tint Top */
+    background: #fff !important;
+    /* Soft Grey */
     overflow: hidden;
     padding-top: 40px;
     padding-bottom: 40px;
-    max-width: 1400px;
+    max-width: none;
     width: 100%;
-    margin: 12px auto;
-    border-radius: 32px;
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
-    /* Stronger glow */
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* AURORA BACKGROUND - Vibrant Gold/Warm - Cache Bust */
+/* AURORA BACKGROUND - Hidden for plain background */
 .aurora-gold-1 {
-    position: absolute;
-    top: -10%;
-    /* Move down slightly */
-    left: -10%;
-    width: 700px;
-    /* Larger */
-    height: 700px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(255, 252, 245, 0) 70%);
-    /* Higher Opacity */
-    filter: blur(60px);
-    /* Less blur for more color */
-    z-index: 0;
-    animation: moveAurora 15s infinite alternate;
+    display: none;
 }
 
 .aurora-gold-2 {
-    position: absolute;
-    bottom: -10%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(255, 252, 245, 0) 70%);
-    filter: blur(60px);
-    z-index: 0;
-    animation: moveAurora 12s infinite alternate-reverse;
+    display: none;
 }
 
 .hero-container-split {
@@ -697,6 +676,7 @@
 .btn-blue:hover {
     background: #FCD34D !important;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
+    transform: translateY(-2px);
 }
 
 .btn-red {
@@ -716,8 +696,8 @@
 /* Home page top spacing */
 .home-page {
     padding-top: 100px;
-    background: linear-gradient(180deg, #FFFCF5 0%, #FFF9E5 100%);
-    /* Gold theme background */
+    background: #FFFFFF !important;
+    /* Plain White */
 }
 
 @media (max-width: 768px) {
@@ -1500,7 +1480,7 @@
 
 .trust-card {
     padding: 32px;
-    background: #fbfbfd;
+    background: #fff;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -1866,11 +1846,10 @@
 
     /* FIX: Hide Aurora blobs completely on small screens to remove risk */
     /* FIX: Ensure Auroras SHOW on mobile now */
+    /* FIX: Auroras hidden on mobile for plain background */
     .aurora-gold-1,
     .aurora-gold-2 {
-        display: block !important;
-        opacity: 0.6;
-        /* Slight reduction for text readability */
+        display: none !important;
     }
 
     /* Clip Hero Visuals strictly */
@@ -2407,5 +2386,66 @@
 
     .reviews-section {
         padding: 40px 0;
+    }
+}
+
+/* ============================================= */
+/* FRESH CLEAN WHITE OVERRIDES - NUCLEAR OPTION */
+/* ============================================= */
+
+.new-arrivals-clean,
+.bestsellers-clean,
+.why-choose-clean,
+.reviews-clean {
+    background: #fff !important;
+    /* Force Plain Soft Grey */
+    background-color: #fff !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-radius: 24px;
+    padding: 40px 0;
+    margin-top: 20px;
+    position: relative;
+    z-index: 10;
+    /* Ensure on top of any body bg */
+}
+
+/* Specific styling for sections */
+.why-choose-clean {
+    padding: 80px 20px;
+}
+
+.reviews-clean {
+    padding: 80px 0;
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    overflow: hidden;
+    background: #fff !important;
+}
+
+/* ============================================= */
+/* SAFARI SPECIFIC OVERRIDES - NUCLEAR OPTION */
+/* ============================================= */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+
+        html,
+        body,
+        .main-content,
+        .home-page,
+        .section-container,
+        .new-arrivals-clean,
+        .bestsellers-clean,
+        .why-choose-clean,
+        .reviews-clean,
+        .product-card,
+        .why-card {
+            background-color: #fff !important;
+            background: #fff !important;
+            background-image: none !important;
+            box-shadow: none !important;
+        }
     }
 }

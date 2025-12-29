@@ -130,7 +130,7 @@ const Home = () => {
       </section>
 
       {/* 2. New Arrivals */}
-      <section className="section-container new-arrivals-gold">
+      <section className="section-container new-arrivals-clean">
         <h2 className="section-headline">New Arrivals for Your Baby</h2>
         <div className="products-grid bestsellers-grid">
           {loading ? (
@@ -146,7 +146,7 @@ const Home = () => {
       </section>
 
       {/* 3. Best Sellers */}
-      <section className="section-container bestsellers-section">
+      <section className="section-container bestsellers-clean">
         <h2 className="section-headline">What Parents Are Loving</h2>
         <div className="products-grid bestsellers-grid">
           {loading ? (
@@ -163,7 +163,7 @@ const Home = () => {
 
 
       {/* 6. Why Choose Nappy Garde */}
-      <section className="why-choose-section">
+      <section className="why-choose-clean">
         <div className="why-choose-container">
           <h2 className="why-choose-title">Why Parents Trust Nappy Garde</h2>
           <p className="why-choose-subtitle">Quality you can count on, every time.</p>
@@ -203,7 +203,7 @@ const Home = () => {
       </section>
 
       {/* 7. Parent Reviews Marquee */}
-      <section className="section-container reviews-section">
+      <section className="section-container reviews-clean">
         <h2 className="section-headline" style={{ textAlign: 'center' }}>Loved by Parents Like You</h2>
         <div className="marquee-wrapper">
           <div className="marquee-content">
