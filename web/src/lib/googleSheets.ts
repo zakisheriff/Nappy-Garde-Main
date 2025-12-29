@@ -45,6 +45,7 @@ export async function addOrder(order: any) {
       throw new Error("Orders sheet not found. Please create a tab named 'Orders'.");
     }
 
+    await sheet.loadHeaderRow(); // Ensure headers are loaded so it knows where to append
     await sheet.addRow({
       OrderID: order.OrderID,
       CustomerName: order.CustomerName,
