@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   openGraph: {
     title: "Nappy Garde",
-    description: "Premium comfort for your little one. Shop Nappy Garde's range of ultra-soft diapers, wipes, and baby care essentials. Island-wide delivery in Sri Lanka.",
+    description: "Premium Comfort for Your Little One. Shop Nappy Garde's Range of Ultra-Soft Diapers, Wipes, and Baby Care Essentials. Island-wide Delivery in Sri Lanka.",
     url: 'https://nappygarde.lk',
     siteName: 'Nappy Garde',
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Nappy Garde",
-    description: "Premium comfort for your little one. Shop Nappy Garde's range of ultra-soft diapers, wipes, and baby care essentials.",
+    description: "Premium Comfort for Your Little One. Shop Nappy Garde's Range of Ultra-Soft Diapers, Wipes, and Baby Care Essentials.",
     images: ['/ng_logo.png'],
   },
   robots: {
