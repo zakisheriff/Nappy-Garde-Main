@@ -87,19 +87,23 @@ export async function checkPromoUsage(phone: string, address: string, code: stri
     const rows = await sheet.getRows();
 
     // Normalize inputs for comparison
-    const searchPhone = phone.toString().trim().replace(/\s+/g, ''); // Remove spaces
-    const searchAddress = address.trim().toLowerCase();
+    // STRICT NORMALIZATION: Remove all non-alphanumeric characters (spaces, commas, slashes, etc.)
+    const normalize = (str: string) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const searchPhone = normalize(phone);
+    const searchAddress = normalize(address);
     const searchCode = code.trim().toLowerCase();
 
     // Check if combo exists
     const exists = rows.some(row => {
-      const rowPhone = row.get('Phone')?.toString().trim().replace(/\s+/g, '') || '';
-      const rowAddress = row.get('Address')?.toString().trim().toLowerCase() || '';
+      const rowPhone = normalize(row.get('Phone')?.toString() || '');
+      const rowAddress = normalize(row.get('Address')?.toString() || '');
       const rowCode = row.get('PromoCode')?.toString().trim().toLowerCase() || '';
 
-      return rowPhone === searchPhone &&
-        rowAddress === searchAddress &&
-        rowCode === searchCode;
+      // Check if code matches first, then check if EITHER phone OR address matches (fuzzy matched)
+      if (rowCode !== searchCode) return false;
+
+      return rowPhone === searchPhone || rowAddress === searchAddress;
     });
 
     return exists;
