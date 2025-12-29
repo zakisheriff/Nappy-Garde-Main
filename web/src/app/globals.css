@@ -63,6 +63,17 @@ select {
   font-size: inherit;
 }
 
+/* ==================== Fonts ==================== */
+@font-face {
+  font-family: 'Cubition Regular';
+  src: url('/fonts/CubitionRegular.woff2') format('woff2'),
+    url('/fonts/CubitionRegular.woff') format('woff'),
+    url('/fonts/CubitionRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==================== CSS Variables ==================== */
 :root {
   /* New Year 2026 - White & Gold Theme */
@@ -1170,4 +1181,18 @@ p {
   width: 100vw !important;
   margin-left: calc(-50vw + 50%) !important;
   margin-right: calc(-50vw + 50%) !important;
+}
+
+/* ============================================= */
+/* TOAST NOTIFICATION OVERRIDES */
+/* ============================================= */
+[data-sonner-toast][data-type="success"] {
+  background: #0071e3 !important;
+  /* Apple Blue */
+  border-color: #0071e3 !important;
+  color: #FFFFFF !important;
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: #FFFFFF !important;
 }

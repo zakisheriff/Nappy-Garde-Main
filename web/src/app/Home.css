@@ -604,9 +604,10 @@
 }
 
 .hero-headline-large {
+    font-family: 'Futura', sans-serif;
     font-size: 72px;
     line-height: 1.05;
-    font-weight: 800;
+    font-weight: 100;
     color: #1D1D1F;
     /* Dark text again */
     letter-spacing: -2px;
@@ -644,7 +645,7 @@
 /* Renaming to avoid conflicts */
 .btn-gold {
     background: #D4AF37 !important;
-    color: #000000 !important;
+    color: #fff !important;
     border: none !important;
 }
 
@@ -656,15 +657,16 @@
 
 .btn-glass-gold {
     background: rgba(255, 255, 255, 0.1) !important;
-    color: #D4AF37 !important;
-    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    color: #0071e3 !important;
+    /* Apple Blue */
+    border: 1px solid rgba(0, 113, 227, 0.3) !important;
     backdrop-filter: blur(10px);
 }
 
 .btn-glass-gold:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: #D4AF37 !important;
-    color: #FCD34D !important;
+    background: rgba(0, 113, 227, 0.05) !important;
+    border-color: #0071e3 !important;
+    color: #0071e3 !important;
 }
 
 /* Legacy overrides just in case */
