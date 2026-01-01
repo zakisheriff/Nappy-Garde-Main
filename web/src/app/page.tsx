@@ -120,10 +120,16 @@ const Home = () => {
                 className="hero-main-image"
               />
               <img
-                src="/images/ny_collage.jpeg"
+                src="/images/ny_collage.jpg"
                 alt="New Year Collection"
                 className="hero-collage-img"
               />
+              {/* Floating Brand Pills */}
+              <div className="brand-pill pill-marvel">Marvel</div>
+              <div className="brand-pill pill-velona">Velona</div>
+              <div className="brand-pill pill-pampers">Pampers</div>
+              <div className="brand-pill pill-global">Global II</div>
+              <div className="brand-pill pill-lody">Lody Baby</div>
             </div>
           </div>
         </div>
