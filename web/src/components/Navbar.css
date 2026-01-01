@@ -94,18 +94,36 @@
     font-size: 14px;
     font-weight: 500;
     padding: 8px 0;
-    transition: opacity 0.3s ease;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
     position: relative;
+    letter-spacing: -0.01em;
+}
+
+/* Elegant Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #0071e3;
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: #0071e3;
-    /* Gold on hover & active */
     opacity: 1;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-    font-weight: 600;
-    /* Slightly bolder active/hover state */
+    text-shadow: 0 0 20px rgba(0, 113, 227, 0.25);
 }
 
 /* Actions */
@@ -131,8 +149,10 @@
 }
 
 .nav-icon-btn:hover {
-    color: #D4AF37;
+    color: #0071e3;
     opacity: 1;
+    transform: scale(1.05);
+    /* Subtle scale effect */
 }
 
 .navbar.menu-open .nav-icon-btn:not(.hamburger) {
