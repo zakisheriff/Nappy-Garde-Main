@@ -203,7 +203,7 @@ const Home = () => {
       </section>
 
       {/* 7. Parent Reviews Marquee */}
-      <section className="section-container reviews-clean">
+      <section className="reviews-clean">
         <h2 className="section-headline" style={{ textAlign: 'center' }}>Loved by Parents Like You</h2>
         <div className="marquee-wrapper">
           <div className="marquee-content">

@@ -13,11 +13,13 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
-    /* Gold shadow */
-    border-color: #D4AF37;
+@media (hover: hover) {
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
+        /* Gold shadow */
+        border-color: #D4AF37;
+    }
 }
 
 .product-image-container {
@@ -44,8 +46,10 @@
     transition: transform 0.3s ease;
 }
 
-.product-card:hover .product-image {
-    transform: scale(1.05);
+@media (hover: hover) {
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
 }
 
 .out-of-stock-badge {
