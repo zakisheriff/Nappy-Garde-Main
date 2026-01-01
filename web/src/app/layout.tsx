@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/ng_logo.png',
-    shortcut: '/ng_logo.png',
-    apple: '/ng_logo.png',
+    icon: '/new_icon.png',
+    shortcut: '/new_icon.png',
+    apple: '/new_icon.png',
   },
   manifest: '/site.webmanifest',
   openGraph: {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: 'Nappy Garde',
     images: [
       {
-        url: '/ng_logo.png',
+        url: '/new_icon.png',
         width: 1200,
         height: 630,
         alt: 'Nappy Garde - Premium Baby Care',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Nappy Garde",
     description: "Premium Comfort for Your Little One. Shop Nappy Garde's Range of Ultra-Soft Diapers, Wipes, and Baby Care Essentials.",
-    images: ['/ng_logo.png'],
+    images: ['/new_icon.png'],
   },
   robots: {
     index: true,
@@ -82,7 +82,7 @@ const jsonLd = {
       "url": "https://nappygarde.lk",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://nappygarde.lk/ng_logo.png",
+        "url": "https://nappygarde.lk/new_icon.png",
         "width": 112,
         "height": 112
       },
