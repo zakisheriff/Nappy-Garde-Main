@@ -103,7 +103,7 @@ export default function CheckoutPage() {
 
         // 1. Validate Code locally
         let validCode = false;
-        if (code === 'NEWYEAR2026' || code === 'WELCOME10') {
+        if (code === 'HELLO2026' || code === 'WELCOME10') {
             validCode = true;
         }
 
