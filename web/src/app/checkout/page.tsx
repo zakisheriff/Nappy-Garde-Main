@@ -40,6 +40,7 @@ export default function CheckoutPage() {
     const [discount, setDiscount] = useState(0);
     const [promoError, setPromoError] = useState('');
     const [promoSuccess, setPromoSuccess] = useState('');
+    const [orderSuccess, setOrderSuccess] = useState<any | null>(null);
 
     useEffect(() => {
         const fetchRecommended = async () => {
@@ -60,10 +61,17 @@ export default function CheckoutPage() {
     }, [cartItems]);
 
     useEffect(() => {
-        if (cartItems.length === 0) {
+        if (cartItems.length === 0 && !orderSuccess) {
             router.push('/cart');
         }
-    }, [cartItems, router]);
+    }, [cartItems, router, orderSuccess]);
+
+    useEffect(() => {
+        if (orderSuccess) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [orderSuccess]);
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -143,7 +151,7 @@ export default function CheckoutPage() {
         }
     };
 
-    const [orderSuccess, setOrderSuccess] = useState<string | null>(null);
+
 
     // ... existing useEffects ...
 
@@ -171,8 +179,19 @@ export default function CheckoutPage() {
             const orderData = await orderRes.json();
 
             if (orderData.success) {
+                const fullOrderDetails = {
+                    orderId: orderData.orderId,
+                    date: new Date().toLocaleString(),
+                    customer: formData,
+                    items: cartItems,
+                    subtotal: total,
+                    discount: discount,
+                    deliveryCharge: deliveryCharge,
+                    total: finalTotal,
+                    promoCode: discount > 0 ? promoCode : ''
+                };
+                setOrderSuccess(fullOrderDetails);
                 clearCart();
-                setOrderSuccess(orderData.orderId);
             } else {
                 alert('Failed to place order. Please try again.');
             }
@@ -187,22 +206,149 @@ export default function CheckoutPage() {
     if (orderSuccess) {
         return (
             <div className="checkout-page page">
-                <div className="container-wide checkout-container" style={{ justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-                    <div className="order-success-card" style={{ textAlign: 'center', padding: '40px', background: 'white', borderRadius: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-                        <div style={{ fontSize: '60px', marginBottom: '20px' }}>🎉</div>
-                        <h1 style={{ fontSize: '32px', marginBottom: '10px', color: '#1d1d1f' }}>Order Placed Successfully!</h1>
-                        <p style={{ fontSize: '18px', color: '#86868b', marginBottom: '30px' }}>
-                            Thank you for your purchase. Your order ID is <strong>{orderSuccess}</strong>.
-                            <br />We will contact you shortly to confirm delivery.
-                        </p>
+                <div className="container-wide checkout-container" style={{ justifyContent: 'center', alignItems: 'center', minHeight: '60vh', flexDirection: 'column' }}>
+
+                    <div id="receipt-area" style={{
+                        background: 'white',
+                        padding: '40px',
+                        borderRadius: '20px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                        maxWidth: '600px',
+                        width: '100%',
+                        marginBottom: '30px',
+                        color: '#1d1d1f'
+                    }}>
+                        {/* Header */}
+                        <div style={{ textAlign: 'center', borderBottom: '2px solid #f5f5f7', paddingBottom: '20px', marginBottom: '20px' }}>
+                            <img src="/new_logo.png" alt="Nappy Garde" style={{ width: '80px', height: '80px', margin: '0 auto 10px', objectFit: 'contain' }} />
+                            <h2 style={{ fontSize: '24px', fontWeight: 'bold', margin: '0' }}>Nappy Garde</h2>
+                            <p style={{ fontSize: '14px', color: '#6e6e73', margin: '4px 0' }}>231 Wolfendhal St, Colombo 00130, LK</p>
+                            <p style={{ fontSize: '14px', color: '#6e6e73', margin: '0' }}>+94 77 779 8788</p>
+                        </div>
+
+                        {/* Order Info */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px', fontSize: '14px' }}>
+                            <div>
+                                <p style={{ fontWeight: '600', marginBottom: '4px' }}>Order ID:</p>
+                                <p>{orderSuccess.orderId}</p>
+                            </div>
+                            <div style={{ textAlign: 'right' }}>
+                                <p style={{ fontWeight: '600', marginBottom: '4px' }}>Date:</p>
+                                <p>{orderSuccess.date}</p>
+                            </div>
+                        </div>
+
+                        {/* Customer Info */}
+                        <div style={{ marginBottom: '30px', fontSize: '14px' }}>
+                            <p style={{ fontWeight: '600', marginBottom: '8px', borderBottom: '1px solid #eee', paddingBottom: '4px' }}>Bill To:</p>
+                            <p style={{ margin: '0' }}>{orderSuccess.customer.name}</p>
+                            <p style={{ margin: '0' }}>{orderSuccess.customer.phone}</p>
+                            <p style={{ margin: '0' }}>{orderSuccess.customer.address}, {orderSuccess.customer.district}</p>
+                        </div>
+
+                        {/* Items Table */}
+                        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px', fontSize: '14px' }}>
+                            <thead>
+                                <tr style={{ borderBottom: '1px solid #eee', textAlign: 'left' }}>
+                                    <th style={{ padding: '8px 0', fontWeight: '600' }}>Item</th>
+                                    <th style={{ padding: '8px 0', textAlign: 'center' }}>Qty</th>
+                                    <th style={{ padding: '8px 0', textAlign: 'right' }}>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orderSuccess.items.map((item: any, idx: number) => (
+                                    <tr key={idx} style={{ borderBottom: '1px solid #f9f9f9' }}>
+                                        <td style={{ padding: '12px 0' }}>{item.ProductName}</td>
+                                        <td style={{ padding: '12px 0', textAlign: 'center' }}>{item.quantity}</td>
+                                        <td style={{ padding: '12px 0', textAlign: 'right' }}>LKR {(Number(item.Price) * item.quantity).toFixed(2)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                        {/* Totals */}
+                        <div style={{ borderTop: '2px solid #f5f5f7', paddingTop: '16px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '14px' }}>
+                                <span>Subtotal</span>
+                                <span>LKR {orderSuccess.subtotal.toFixed(2)}</span>
+                            </div>
+
+                            {orderSuccess.discount > 0 && (
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '14px', color: '#27ae60' }}>
+                                    <span>Discount ({orderSuccess.promoCode})</span>
+                                    <span>- LKR {orderSuccess.discount.toFixed(2)}</span>
+                                </div>
+                            )}
+
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '14px' }}>
+                                <span>Delivery</span>
+                                <span>LKR {orderSuccess.deliveryCharge.toFixed(2)}</span>
+                            </div>
+
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px', fontSize: '18px', fontWeight: 'bold', color: '#1d1d1f' }}>
+                                <span>Total</span>
+                                <span>LKR {orderSuccess.total.toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '12px', color: '#86868b' }}>
+                            <p>Thank you for shopping with Nappy Garde!</p>
+                            <p>www.nappygarde.lk</p>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
                         <button
-                            onClick={() => router.push('/')}
-                            className="place-order-btn"
-                            style={{ maxWidth: '300px', margin: '0 auto' }}
+                            onClick={() => {
+                                const printContent = document.getElementById('receipt-area');
+                                if (printContent) {
+                                    const style = document.createElement('style');
+                                    style.innerHTML = `
+                                        @media print {
+                                            body * { visibility: hidden; }
+                                            #receipt-area, #receipt-area * { visibility: visible; }
+                                            #receipt-area { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; }
+                                            .btn, button { display: none !important; }
+                                        }
+                                    `;
+                                    document.head.appendChild(style);
+                                    window.print();
+                                    document.head.removeChild(style);
+                                }
+                            }}
+                            className="btn"
+                            style={{
+                                minWidth: '200px',
+                                borderRadius: '980px', // Pill shape
+                                backgroundColor: '#ff3b30', // Apple Red
+                                color: 'white',
+                                fontWeight: '600',
+                                padding: '16px 32px',
+                                boxShadow: '0 4px 12px rgba(255, 59, 48, 0.3)',
+                                flex: '1 1 200px'
+                            }}
+                        >
+                            Download Receipt
+                        </button>
+
+                        <button
+                            onClick={() => router.push('/products')}
+                            className="btn"
+                            style={{
+                                minWidth: '200px',
+                                borderRadius: '980px', // Pill shape
+                                backgroundColor: 'transparent',
+                                border: '2px solid #0071e3', // Apple Blue Border
+                                color: '#0071e3',
+                                fontWeight: '600',
+                                padding: '14px 30px', /* accounting for border */
+                                flex: '1 1 200px'
+                            }}
                         >
                             Continue Shopping
                         </button>
                     </div>
+
                 </div>
             </div>
         );
