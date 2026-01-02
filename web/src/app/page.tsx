@@ -188,7 +188,7 @@ const Home = () => {
                 <FastForward size={32} color="#D4AF37" />
               </div>
               <h3 className="why-card-title">Same Day Delivery</h3>
-              <p className="why-card-text">Order before 2 PM and receive your essentials the same day.</p>
+              <p className="why-card-text">Order before 10 AM and receive your essentials the same day.</p>
             </div>
 
             <div className="why-card">

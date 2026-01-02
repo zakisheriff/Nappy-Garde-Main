@@ -338,7 +338,7 @@ export default function CheckoutPage() {
                                 minWidth: '200px',
                                 borderRadius: '980px', // Pill shape
                                 backgroundColor: 'transparent',
-                                border: '2px solid #0071e3', // Apple Blue Border
+                                border: '1px solid #0071e3', // Apple Blue Border
                                 color: '#0071e3',
                                 fontWeight: '600',
                                 padding: '14px 30px', /* accounting for border */

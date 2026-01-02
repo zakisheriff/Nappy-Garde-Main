@@ -31,18 +31,18 @@ const Footer = () => {
                     <div className="footer-section">
                         <h4 className="footer-heading">Support</h4>
                         <div className="support-buttons">
-                            <a href="https://wa.me/94777798788" target="_blank" rel="noopener noreferrer" className="footer-btn">
-                                Contact Us
-                            </a>
-                            <a href="/faqs" className="footer-btn secondary">
+                            <a href="/faqs" className="footer-btn btn-red">
                                 FAQs
+                            </a>
+                            <a href="https://wa.me/94777798788" target="_blank" rel="noopener noreferrer" className="footer-btn btn-blue-outline">
+                                Contact Us
                             </a>
                         </div>
 
                         <div className="footer-info-block">
                             <p><strong>Address:</strong> 231 Wolfendhal St, Colombo 00130</p>
                             <p><strong>Areas served:</strong> Colombo</p>
-                            <p><strong>Hours:</strong> Closed · Opens 10:30 AM Sun</p>
+                            <p><strong>Hours:</strong> Mon-Sat: 10:30 AM – 9:30 PM <br /> Sun: 10:30 AM – 7:30 PM</p>
                             <p><strong>Phone:</strong> <a href="tel:0777798788">077 779 8788</a></p>
                         </div>
                     </div>
