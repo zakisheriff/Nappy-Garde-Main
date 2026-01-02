@@ -10,15 +10,16 @@
     border-radius: 16px;
     padding: 12px;
     border: 1px solid transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 @media (hover: hover) {
     .product-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
-        /* Gold shadow */
-        border-color: #D4AF37;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+        /* Neutral shadow */
+        border-color: #0071e3 !important;
+        /* Force Apple Blue border */
     }
 }
 
@@ -27,12 +28,13 @@
     width: 100%;
     padding-top: 100%;
     /* 1:1 Aspect Ratio */
-    background: linear-gradient(135deg, #FFFCF5 0%, #FFF9E5 100%);
-    /* Warm Gold Tint */
+    background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+    /* Neutral background */
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    /* Force Neutral Border */
 }
 
 .product-image {
@@ -112,8 +114,8 @@
 }
 
 .star.filled {
-    color: #D4AF37;
-    /* Gold */
+    color: #f5a623;
+    /* Yellow */
 }
 
 .rating-text {
@@ -133,8 +135,7 @@
 .product-price {
     font-size: 18px;
     font-weight: 700;
-    color: #D4AF37;
-    /* Gold price */
+    color: #1d1d1f;
 }
 
 /* Button Styles */
@@ -145,9 +146,9 @@
     gap: 6px;
     width: 100%;
     padding: 10px 16px;
-    background-color: #D4AF37;
-    /* Gold */
-    color: #000000;
+    background-color: #0071e3;
+    /* Blue */
+    color: #ffffff;
     font-size: 13px;
     font-weight: 600;
     border: none;
@@ -157,9 +158,9 @@
 }
 
 .add-bag-btn:hover:not(:disabled) {
-    background-color: #FCD34D;
+    background-color: #0077ed;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
 }
 
 .add-bag-btn:active:not(:disabled) {

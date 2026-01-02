@@ -61,8 +61,8 @@
 }
 
 .footer-link:hover {
-    color: #D4AF37;
-    /* Gold hover */
+    color: #0071e3;
+    /* Apple Blue hover */
     transform: translateX(4px);
 }
 
@@ -97,8 +97,9 @@
 }
 
 .social-link:hover {
-    color: #D4AF37;
-    background-color: rgba(212, 175, 55, 0.1);
+    color: #0071e3;
+    /* Apple Blue */
+    background-color: rgba(0, 113, 227, 0.1);
     transform: translateY(-1px);
 }
 
@@ -204,6 +205,6 @@
 }
 
 .footer-info-block a:hover {
-    color: #D4AF37;
+    color: #0071e3;
     text-decoration: underline;
 }

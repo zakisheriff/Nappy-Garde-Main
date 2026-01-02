@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     default: "Nappy Garde",
     template: "%s | Nappy Garde"
   },
-  description: "Nappy Garde Offers Premium Baby Diapers, Pants, Wipes, and Skincare Products in Sri Lanka. Ultra-soft Comfort, Superior Absorption, and Island-wide Delivery.",
+  description: "Nappy Garde offers Premium Baby Diapers, Pants, Wipes, and Skincare Products in Sri Lanka. Ultra-soft Comfort, Superior Absorption, and Island-Wide Delivery.",
   keywords: ["Nappy Garde", "nappy garde", "Nappy Garde LK", "Nappy Garde Website", "Marvel Diapers", "Pampers Shop", "baby diapers", "baby pants", "wet wipes", "sensitive skin diapers", "baby care Sri Lanka", "diaper delivery Colombo"],
   authors: [{ name: "Nappy Garde" }],
   creator: "Nappy Garde",

@@ -76,13 +76,33 @@ select {
 
 /* ==================== CSS Variables ==================== */
 :root {
-  /* New Year 2026 - White & Gold Theme */
-  --primary-blue: #D4AF37;
-  /* Gold Main */
-  --primary-gold: #D4AF37;
+  /* New Year 2026 - White & Blue Theme */
+  --primary-blue: #0071e3;
+  /* Apple Blue */
+  --primary-gold: #0071e3;
   --primary-dark: #1D1D1F;
-  --secondary-red: #C5A028;
-  /* Darker Gold for hover */
+  --secondary-red: #ff3b30;
+  /* Apple Red */
+
+  /* ... (rest of variables) ... */
+
+  /* ... (down to buttons) ... */
+
+  .btn-primary {
+    background-color: #0071e3;
+    color: white;
+  }
+
+  /* ... (down to spinner) ... */
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: #0071e3;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
 
   /* Backgrounds */
   --bg-primary: #FFFFFF;
@@ -97,14 +117,14 @@ select {
   /* Dark Slate/Black */
   --text-secondary: #6E6E73;
   /* Grey */
-  --text-gold: #D4AF37;
+  --text-gold: #1d1d1f;
 
   --border-color: #D2D2D7;
   --hover-bg: #F5F5F7;
 
   /* Glassmorphic colors - Light Mode */
   --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(212, 175, 55, 0.2);
+  --glass-border: rgba(0, 113, 227, 0.2);
   /* Gold trace */
 
   /* Shadows */
@@ -269,9 +289,8 @@ p {
 }
 
 .btn-primary {
-  background-color: #D4AF37;
-  color: #000000;
-  /* Dark Text for Gold Button */
+  background-color: #0071e3;
+  color: white;
 }
 
 .btn-secondary {
@@ -297,46 +316,32 @@ p {
 }
 
 /* New Year Theme Buttons */
+/* New Year Theme Buttons */
 .btn-gold {
-  background: linear-gradient(135deg, #FCD34D 0%, #D4AF37 100%) !important;
-  color: #1D1D1F !important;
-  border: none;
-  font-weight: 700 !important;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  position: relative;
-  overflow: hidden;
-  /* Contain the shine */
+  /* No additional global styles, handled in Home.css */
+  background: transparent;
+  box-shadow: none !important;
 }
 
-/* Shine effect element */
+/* Shine effect element - REMOVED */
 .btn-gold::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
-  transform: skewX(-25deg);
-  transition: none;
+  display: none !important;
 }
 
 .btn-gold:hover {
-  /* No color change, no movement */
   transform: none !important;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  /* Keep shadow static or subtle */
+  box-shadow: none !important;
 }
 
-/* Trigger shine on hover */
+/* Trigger shine on hover - REMOVED */
 .btn-gold:hover::after {
-  animation: shine 0.75s;
+  display: none !important;
 }
 
 .btn-glass-gold {
   background: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid #D4AF37 !important;
-  color: #D4AF37 !important;
+  border: 1px solid #0071e3 !important;
+  color: #0071e3 !important;
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -349,8 +354,8 @@ p {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.4) 50%, rgba(212, 175, 55, 0) 100%);
-  /* Gold shine for glass btn */
+  background: linear-gradient(to right, rgba(0, 113, 227, 0) 0%, rgba(0, 113, 227, 0.4) 50%, rgba(0, 113, 227, 0) 100%);
+  /* Blue shine for glass btn */
   transform: skewX(-25deg);
   transition: none;
 }
@@ -358,7 +363,7 @@ p {
 .btn-glass-gold:hover {
   /* No color change, no movement */
   background: rgba(255, 255, 255, 0.8) !important;
-  color: #D4AF37 !important;
+  color: #0071e3 !important;
   transform: none !important;
 }
 
@@ -485,7 +490,7 @@ p {
   width: 40px;
   height: 40px;
   border: 4px solid var(--border-color);
-  border-top-color: var(--primary-blue);
+  border-top-color: #0071e3;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -689,6 +694,7 @@ p {
 .product-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  /* Neutral shadow */
 }
 
 .product-image-container {
@@ -701,7 +707,8 @@ p {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 12px;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  /* Neutral Border */
 }
 
 .product-image {
@@ -772,8 +779,6 @@ p {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-
 
 .product-footer {
   display: flex;
@@ -874,8 +879,6 @@ p {
 /* ============================================= */
 
 /* 1. Hero Section - FORCED GLOBAL */
-/* 1. Hero Section - FORCED GLOBAL */
-/* 1. Hero Section - FORCED GLOBAL */
 .hero-section {
   position: relative;
   background: #fbfbfd !important;
@@ -914,13 +917,13 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #D4AF37;
-  /* Gold */
+  color: #0071e3;
+  /* Blue */
   margin-bottom: 16px;
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(0, 113, 227, 0.1);
   padding: 6px 12px;
   border-radius: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(0, 113, 227, 0.2);
 }
 
 .hero-subheadline-seasonal {
@@ -965,7 +968,6 @@ p {
   display: none !important;
 }
 
-/* Mobile Overrides for Auroras and Hero Image */
 /* Mobile Overrides for Auroras and Hero Image */
 @media (max-width: 768px) {
   .hero-section {
@@ -1059,24 +1061,27 @@ p {
 }
 
 .why-icon {
-  background: #f5f5f7 !important;
-  /* Light Grey */
-  color: #D4AF37 !important;
-  /* Keep Icon Gold */
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: inherit;
+  /* Ensure no residual color */
 }
 
-.why-icon svg {
-  color: #D4AF37 !important;
-  stroke: #D4AF37 !important;
-}
+/* ALLOW Home.css SPECIFICITY TO WORK */
+/* Removed global gold override */
 
 .why-card-title {
   color: #1D1D1F !important;
 }
 
 .why-choose-subtitle {
-  color: #8E7F5E !important;
-  /* Gold-Grey */
+  color: #86868b !important;
+  /* Grey */
 }
 
 /* ============================================= */
@@ -1126,13 +1131,13 @@ p {
 }
 
 .stars {
-  color: #D4AF37 !important;
-  /* Gold Stars */
+  color: #f5a623 !important;
+  /* Yellow/Amber Stars */
 }
 
 .review-author {
-  color: #D4AF37 !important;
-  /* Gold name */
+  color: #86868b !important;
+  /* Grey name - overwritten in Home.css for red/blue split */
 }
 
 .section-headline {
@@ -1143,8 +1148,8 @@ p {
 /* Ensure these trigger last */
 .new-arrivals-gold .section-headline,
 .bestsellers-section .section-headline {
-  color: #D4AF37 !important;
-  /* Gold Headline for both */
+  color: #1d1d1f !important;
+  /* Dark Headline */
   font-weight: 700 !important;
 }
 

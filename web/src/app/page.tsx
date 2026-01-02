@@ -176,24 +176,24 @@ const Home = () => {
 
           <div className="why-choose-grid">
             <div className="why-card">
-              <div className="why-icon">
-                <ShieldCheck size={32} color="#D4AF37" />
+              <div className="why-icon icon-red">
+                <ShieldCheck size={32} />
               </div>
               <h3 className="why-card-title">100% Authentic</h3>
               <p className="why-card-text">Every product is sourced directly from authorized distributors.</p>
             </div>
 
             <div className="why-card">
-              <div className="why-icon">
-                <FastForward size={32} color="#D4AF37" />
+              <div className="why-icon icon-black">
+                <FastForward size={32} />
               </div>
               <h3 className="why-card-title">Same Day Delivery</h3>
               <p className="why-card-text">Order before 10 AM and receive your essentials the same day.</p>
             </div>
 
             <div className="why-card">
-              <div className="why-icon">
-                <HeartHandshake size={32} color="#D4AF37" />
+              <div className="why-icon icon-blue">
+                <HeartHandshake size={32} />
               </div>
               <h3 className="why-card-title">Expert Support</h3>
               <p className="why-card-text">Our team of parents is here to help you choose the right products.</p>
@@ -219,21 +219,21 @@ const Home = () => {
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Super fast delivery! I ordered in the morning and got it by evening. Lifesaver for busy moms."</p>
-              <p className="review-author">Sarah, Colombo</p>
+              <p className="review-author"><span className="review-author-name">Sarah,</span> <span className="review-author-location">Colombo</span></p>
             </div>
             <div className="review-card">
               <div className="stars">
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Love the variety. I can buy different brands for day and night in one go. Excellent service from Nappy Garde."</p>
-              <p className="review-author">Mike, Kandy</p>
+              <p className="review-author"><span className="review-author-name">Rizlan,</span> <span className="review-author-location">Kandy</span></p>
             </div>
             <div className="review-card">
               <div className="stars">
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Genuine products at the best prices. Nappy Garde is my go-to for all baby essentials."</p>
-              <p className="review-author">Emily, Galle</p>
+              <p className="review-author"><span className="review-author-name">Emily,</span> <span className="review-author-location">Galle</span></p>
             </div>
             {/* Duplicated for seamless loop */}
             <div className="review-card">
@@ -241,21 +241,21 @@ const Home = () => {
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Super fast delivery! I ordered in the morning and got it by evening. Lifesaver for busy moms."</p>
-              <p className="review-author">Sarah, Colombo</p>
+              <p className="review-author"><span className="review-author-name">Sarah,</span> <span className="review-author-location">Colombo</span></p>
             </div>
             <div className="review-card">
               <div className="stars">
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Love the variety. I can buy different brands for day and night in one go. Excellent service from Nappy Garde."</p>
-              <p className="review-author">Mike, Kandy</p>
+              <p className="review-author"><span className="review-author-name">Mohammad,</span> <span className="review-author-location">Kandy</span></p>
             </div>
             <div className="review-card">
               <div className="stars">
                 <Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" /><Star size={16} fill="#f5a623" stroke="none" />
               </div>
               <p className="review-text">"Genuine products at the best prices. Nappy Garde is my go-to for all baby essentials."</p>
-              <p className="review-author">Emily, Galle</p>
+              <p className="review-author"><span className="review-author-name">Perera,</span> <span className="review-author-location">Galle</span></p>
             </div>
           </div>
         </div>

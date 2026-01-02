@@ -248,14 +248,61 @@
 .why-icon {
     width: 64px;
     height: 64px;
-    background: #f5f5f7;
-    /* Very light gold */
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    color: #D4AF37;
+    color: inherit;
+    /* Ensure no residual color */
+}
+
+.icon-red {
+    background: rgba(255, 59, 48, 0.1) !important;
+    background-image: none !important;
+    /* Remove any texture */
+    color: #ff3b30 !important;
+}
+
+.icon-red svg {
+    stroke: #ff3b30 !important;
+    color: #ff3b30 !important;
+}
+
+.icon-black {
+    background: #ffffff !important;
+    /* Pure White */
+    background-image: none !important;
+    /* Remove any texture */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: none !important;
+    position: relative;
+    z-index: 1;
+}
+
+.icon-black::before,
+.icon-black::after {
+    display: none !important;
+    content: none !important;
+}
+
+.icon-black svg {
+    stroke: #1d1d1f !important;
+    color: #1d1d1f !important;
+    position: relative;
+    z-index: 2;
+}
+
+.icon-blue {
+    background: rgba(0, 113, 227, 0.1) !important;
+    background-image: none !important;
+    /* Remove any texture */
+    color: #0071e3 !important;
+}
+
+.icon-blue svg {
+    stroke: #0071e3 !important;
+    color: #0071e3 !important;
 }
 
 .why-card-title {
@@ -280,7 +327,7 @@
     padding: 16px 40px;
     font-size: 17px;
     font-weight: 600;
-    background: #D4AF37;
+    background: #0071e3;
     color: #ffffff;
     border-radius: 100px;
     text-decoration: none;
@@ -305,11 +352,11 @@
 }
 
 .why-cta-btn:hover {
-    background: #D4AF37;
-    /* Keep background same */
+    background: #0077ed;
+    /* Slightly lighter blue */
     color: #ffffff;
-    /* Keep text same */
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4);
+    /* Blue shadow */
 }
 
 .why-cta-btn:hover::after {
@@ -647,11 +694,21 @@
     background: #ff3b30 !important;
     color: #fff !important;
     border: none !important;
+    box-shadow: none !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gold::before,
+.btn-gold::after {
+    display: none !important;
+    content: none !important;
 }
 
 .btn-gold:hover {
     background: #ff3b30 !important;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 .btn-glass-gold {
@@ -676,7 +733,6 @@
 
 .btn-blue:hover {
     background: #FCD34D !important;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
     transform: translateY(-2px);
 }
 
@@ -684,7 +740,6 @@
     background: rgba(255, 255, 255, 0.1) !important;
     color: #D4AF37 !important;
     border: 1px solid rgba(212, 175, 55, 0.3) !important;
-    backdrop-filter: blur(10px);
 }
 
 .btn-red:hover {
@@ -1751,6 +1806,14 @@
     font-weight: 600;
     font-size: 14px;
     color: #86868b;
+}
+
+.review-author-name {
+    color: #ff3b30;
+}
+
+.review-author-location {
+    color: #0071e3;
 }
 
 /* 5. Shop by Stage Adjustments */

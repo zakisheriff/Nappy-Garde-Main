@@ -324,13 +324,13 @@
     padding: 16px 24px;
     font-size: 17px;
     font-weight: 700;
-    color: #1d1d1f;
+    color: #fff;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: linear-gradient(135deg, #FCD34D 0%, #D4AF37 100%);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, #0071e3 0%, #4facfe 100%);
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -354,7 +354,7 @@
 }
 
 .place-order-btn:hover {
-    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 6px 16px rgba(0, 113, 227, 0.4);
 }
 
 .checkout-note {
