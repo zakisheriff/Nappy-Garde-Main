@@ -138,8 +138,40 @@ export async function recordPromoUsage(phone: string, address: string, code: str
       Date: new Date().toLocaleString()
     });
     return true;
+
   } catch (error) {
     console.error('Error recording promo usage:', error);
+    return false;
+  }
+}
+
+export async function addProductRequest(productName: string, details: string) {
+  try {
+    const doc = getGoogleDoc();
+    await doc.loadInfo();
+    let sheet = doc.sheetsByTitle['Product Requests'];
+
+    // Auto-create sheet if missing
+    if (!sheet) {
+      sheet = await doc.addSheet({ headerValues: ['ProductName', 'Details', 'Date'] });
+      await sheet.updateProperties({ title: 'Product Requests' });
+    } else {
+      // Ensure headers exist
+      try {
+        await sheet.loadHeaderRow();
+      } catch (e) {
+        await sheet.setHeaderRow(['ProductName', 'Details', 'Date']);
+      }
+    }
+
+    await sheet.addRow({
+      ProductName: productName,
+      Details: details,
+      Date: new Date().toLocaleString()
+    });
+    return true;
+  } catch (error) {
+    console.error('Error adding product request:', error);
     return false;
   }
 }

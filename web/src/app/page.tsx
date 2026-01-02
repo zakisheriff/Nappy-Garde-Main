@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import ProductRequest from '@/components/ProductRequest';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -296,7 +297,7 @@ const Home = () => {
                     <span className="modal-result-size">{sizeResult}</span>
                   </div>
                   <Link
-                    href={`/products?size=${sizeResult}`}
+                    href={`/ products ? size = ${sizeResult} `}
                     className="modal-result-link"
                     onClick={() => setShowSizeModal(false)}
                   >
@@ -350,6 +351,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* 7. Product Request Section */}
+      <ProductRequest />
 
     </div >
   );
