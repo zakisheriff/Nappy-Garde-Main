@@ -2481,9 +2481,17 @@
 
 .marquee-content {
     display: flex;
-    gap: 32px;
+    gap: 0;
+    /* Gap removed to fix loop math */
     width: max-content;
-    animation: marqueeScroll 40s linear infinite;
+    width: max-content;
+    align-items: center;
+    animation: marqueeScroll 20s linear infinite;
+    /* Safari Optimization */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .marquee-content:hover {
@@ -2505,6 +2513,8 @@
     max-width: 350px;
     background: #fff;
     padding: 32px;
+    margin-right: 32px;
+    /* Spacing moved here for seamless loop */
     border-radius: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     border: 1px solid #f0f0f0;
@@ -2610,12 +2620,114 @@
         .bestsellers-clean,
         .why-choose-clean,
         .reviews-clean,
-        .product-card,
-        .why-card {
+        .product-card {
             background-color: #fff !important;
             background: #fff !important;
             background-image: none !important;
             box-shadow: none !important;
         }
+    }
+}
+
+/* ============================================= */
+/* BRAND MARQUEE SECTION */
+/* ============================================= */
+.brands-marquee-section {
+    background: #ffffff;
+    padding: 20px 0;
+    /* Reduced padding */
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.brands-title {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #86868b;
+    margin-bottom: 20px;
+}
+
+.brands-marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.brands-marquee-content {
+    display: flex;
+    gap: 60px;
+    /* Removed gap, relying on padding/container width */
+    width: max-content;
+    align-items: center;
+    /* Vertically center logos */
+    animation: brandScroll 10s linear infinite;
+    /* Hardware acceleration for Safari */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+@keyframes brandScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-25%);
+        /* Move only 1/4th (one loop) for seamless reset with buffer */
+    }
+}
+
+/* Pause on hover REMOVED for smoother experience */
+/* .brands-marquee-wrapper:hover .brands-marquee-content {
+    animation-play-state: paused;
+} */
+
+.brand-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Fixed container for consistency */
+    width: 160px;
+    height: 80px;
+    /* Fix for Safari disappearing items */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.brand-logo {
+    /* constrained by max width/height instead of fixed height */
+    width: auto;
+    height: auto;
+    max-width: 140px;
+    max-height: 50px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+
+/* Mobile responsive for brands */
+@media (max-width: 768px) {
+    .brands-marquee-section {
+        padding: 40px 0;
+    }
+
+    .brand-item {
+        font-size: 20px;
+    }
+
+    .brands-marquee-content {
+        gap: 32px;
+        animation-duration: 15s;
+        /* Faster on mobile */
     }
 }

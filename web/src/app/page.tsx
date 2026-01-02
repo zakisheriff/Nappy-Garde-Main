@@ -308,6 +308,49 @@ const Home = () => {
           </div>
         )
       }
+      {/* 6. Brand Marquee Section */}
+      <section className="brands-marquee-section">
+        <div className="section-container">
+          <p className="brands-title">Trusted by Leading Brands</p>
+          <div className="brands-marquee-wrapper">
+            <div className="brands-marquee-content">
+              {/* Brand Items - Loop 1 */}
+              <div className="brand-item"><img src="https://marvel.lk/wp-content/uploads/2024/06/marvel-logo.png" alt="Marvel" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.globaldiapers.lk/wp-content/uploads/2022/09/global_ii_logo-e1662112430690.png" alt="Global" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://1000logos.net/wp-content/uploads/2017/04/Pampers-Logo.png" alt="Pampers" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsabVljkyDrTlJjZdQnlHWwnNCKP7tUY-eQ&s" alt="Baby Cheramy" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://farlin.lk/wp-content/uploads/2021/06/New-Project-16.png" alt="Farlin" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.nbc.lk/cms/assets/uploads/2021/06/Panda_Baby-200x120.png" alt="Panda Baby" className="brand-logo" /></div>
+
+              {/* Brand Items - Loop 2 (Duplicate for smooth scroll) */}
+              <div className="brand-item"><img src="https://marvel.lk/wp-content/uploads/2024/06/marvel-logo.png" alt="Marvel" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.globaldiapers.lk/wp-content/uploads/2022/09/global_ii_logo-e1662112430690.png" alt="Global" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://1000logos.net/wp-content/uploads/2017/04/Pampers-Logo.png" alt="Pampers" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsabVljkyDrTlJjZdQnlHWwnNCKP7tUY-eQ&s" alt="Baby Cheramy" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://farlin.lk/wp-content/uploads/2021/06/New-Project-16.png" alt="Farlin" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.nbc.lk/cms/assets/uploads/2021/06/Panda_Baby-200x120.png" alt="Panda Baby" className="brand-logo" /></div>
+
+              {/* Brand Items - Loop 3 (Duplicate for smooth scroll) */}
+              <div className="brand-item"><img src="https://marvel.lk/wp-content/uploads/2024/06/marvel-logo.png" alt="Marvel" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.globaldiapers.lk/wp-content/uploads/2022/09/global_ii_logo-e1662112430690.png" alt="Global" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://1000logos.net/wp-content/uploads/2017/04/Pampers-Logo.png" alt="Pampers" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsabVljkyDrTlJjZdQnlHWwnNCKP7tUY-eQ&s" alt="Baby Cheramy" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://farlin.lk/wp-content/uploads/2021/06/New-Project-16.png" alt="Farlin" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.nbc.lk/cms/assets/uploads/2021/06/Panda_Baby-200x120.png" alt="Panda Baby" className="brand-logo" /></div>
+
+              {/* Brand Items - Loop 4 (Duplicate for smooth scroll) */}
+              <div className="brand-item"><img src="https://marvel.lk/wp-content/uploads/2024/06/marvel-logo.png" alt="Marvel" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.globaldiapers.lk/wp-content/uploads/2022/09/global_ii_logo-e1662112430690.png" alt="Global" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJmmvTmR8WueIf09nV5Yso-PXiUyHa4F1fbQ&s" alt="Velona" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://1000logos.net/wp-content/uploads/2017/04/Pampers-Logo.png" alt="Pampers" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsabVljkyDrTlJjZdQnlHWwnNCKP7tUY-eQ&s" alt="Baby Cheramy" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://farlin.lk/wp-content/uploads/2021/06/New-Project-16.png" alt="Farlin" className="brand-logo" /></div>
+              <div className="brand-item"><img src="https://www.nbc.lk/cms/assets/uploads/2021/06/Panda_Baby-200x120.png" alt="Panda Baby" className="brand-logo" /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div >
   );
 };
