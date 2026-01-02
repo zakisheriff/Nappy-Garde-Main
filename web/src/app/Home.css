@@ -2915,6 +2915,10 @@
         font-size: 17px;
         padding: 16px 36px;
         margin-top: 16px;
+        align-self: center;
+        /* Prevent full width stretch */
+        min-width: 200px;
+        /* Minimum width for balance */
     }
 
     .request-form {
