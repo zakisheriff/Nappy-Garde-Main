@@ -257,49 +257,19 @@
     /* Ensure no residual color */
 }
 
-.icon-red {
-    background: rgba(255, 59, 48, 0.1) !important;
-    background-image: none !important;
-    /* Remove any texture */
-    color: #ff3b30 !important;
-}
-
-.icon-red svg {
-    stroke: #ff3b30 !important;
-    color: #ff3b30 !important;
-}
-
-.icon-black {
-    background: #ffffff !important;
-    /* Pure White */
-    background-image: none !important;
-    /* Remove any texture */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: none !important;
-    position: relative;
-    z-index: 1;
-}
-
-.icon-black::before,
-.icon-black::after {
-    display: none !important;
-    content: none !important;
-}
-
-.icon-black svg {
-    stroke: #1d1d1f !important;
-    color: #1d1d1f !important;
-    position: relative;
-    z-index: 2;
-}
-
+/* Unified Icon Styling - All Professional Blue */
+.icon-red,
+.icon-black,
 .icon-blue {
     background: rgba(0, 113, 227, 0.1) !important;
     background-image: none !important;
-    /* Remove any texture */
     color: #0071e3 !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
+.icon-red svg,
+.icon-black svg,
 .icon-blue svg {
     stroke: #0071e3 !important;
     color: #0071e3 !important;
@@ -2542,7 +2512,12 @@
     margin-top: 24px;
     font-weight: 600;
     font-size: 14px;
-    color: #86868b;
+    color: #1d1d1f;
+}
+
+.review-author-name,
+.review-author-location {
+    color: #1d1d1f !important;
 }
 
 /* Mobile Responsive Reviews */
@@ -2737,8 +2712,8 @@
 /* ============================================= */
 .product-request-section {
     background: #fff;
-    padding: 40px 20px;
-    /* Reduced from 80px 0 */
+    padding: 120px 20px;
+    /* Increased to 120px for mobile too */
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -2772,6 +2747,8 @@
     flex-direction: column;
     gap: 16px;
     /* Reduced gap */
+    align-items: center;
+    /* Center children (button) */
 }
 
 .form-group {
@@ -2813,13 +2790,18 @@
     font-size: 15px;
     /* Reduced size */
     font-weight: 600;
-    padding: 12px 24px;
+    padding: 12px 32px;
     /* Reduced padding */
     border-radius: 980px;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: 8px;
+    width: fit-content;
+    /* Don't stretch */
+    align-self: center;
+    /* Center in flex container */
+    min-width: 160px;
 }
 
 .request-button:hover {
@@ -2877,8 +2859,8 @@
 /* Desktop Responsive Overrides */
 @media (min-width: 768px) {
     .product-request-section {
-        padding: 60px 0;
-        /* Medium breathing room */
+        padding: 120px 0;
+        /* Increased breathing room */
     }
 
     .request-content {
@@ -2915,10 +2897,6 @@
         font-size: 17px;
         padding: 16px 36px;
         margin-top: 16px;
-        align-self: center;
-        /* Prevent full width stretch */
-        min-width: 200px;
-        /* Minimum width for balance */
     }
 
     .request-form {
