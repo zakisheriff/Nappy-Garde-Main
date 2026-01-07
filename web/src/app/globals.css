@@ -315,60 +315,78 @@ p {
   }
 }
 
-/* New Year Theme Buttons */
-/* New Year Theme Buttons */
-.btn-gold {
-  /* No additional global styles, handled in Home.css */
-  background: transparent;
+/* Red Button - Shop Essentials */
+.btn-gold,
+.btn.btn-gold {
+  background: #ff3b30 !important;
+  color: #fff !important;
+  border: none !important;
   box-shadow: none !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-/* Shine effect element - REMOVED */
-.btn-gold::after {
-  display: none !important;
-}
-
-.btn-gold:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-/* Trigger shine on hover - REMOVED */
-.btn-gold:hover::after {
-  display: none !important;
-}
-
-.btn-glass-gold {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid #0071e3 !important;
-  color: #0071e3 !important;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-glass-gold::after {
+.btn-gold::after,
+.btn.btn-gold::after {
   content: '';
+  display: block;
   position: absolute;
   top: 0;
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(0, 113, 227, 0) 0%, rgba(0, 113, 227, 0.4) 50%, rgba(0, 113, 227, 0) 100%);
-  /* Blue shine for glass btn */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
   transform: skewX(-25deg);
-  transition: none;
+  pointer-events: none;
 }
 
-.btn-glass-gold:hover {
-  /* No color change, no movement */
+.btn-gold:hover,
+.btn.btn-gold:hover {
+  background: #ff3b30 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-gold:hover::after,
+.btn.btn-gold:hover::after {
+  animation: shine 0.75s forwards;
+}
+
+/* Glass Button - Contact Us */
+.btn-glass-gold,
+.btn.btn-glass-gold {
   background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #0071e3 !important;
+  color: #0071e3 !important;
+  backdrop-filter: blur(10px);
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.btn-glass-gold::after,
+.btn.btn-glass-gold::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 113, 227, 0) 0%, rgba(0, 113, 227, 0.6) 50%, rgba(0, 113, 227, 0) 100%);
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+.btn-glass-gold:hover,
+.btn.btn-glass-gold:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
   color: #0071e3 !important;
   transform: none !important;
 }
 
-.btn-glass-gold:hover::after {
-  animation: shine 0.75s;
+.btn-glass-gold:hover::after,
+.btn.btn-glass-gold:hover::after {
+  animation: shine 0.75s forwards;
 }
 
 .btn-outline {

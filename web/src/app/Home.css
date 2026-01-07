@@ -659,41 +659,7 @@
     transition: all 0.3s ease;
 }
 
-/* Renaming to avoid conflicts */
-.btn-gold {
-    background: #ff3b30 !important;
-    color: #fff !important;
-    border: none !important;
-    box-shadow: none !important;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-gold::before,
-.btn-gold::after {
-    display: none !important;
-    content: none !important;
-}
-
-.btn-gold:hover {
-    background: #ff3b30 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-
-.btn-glass-gold {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #0071e3 !important;
-    /* Apple Blue */
-    border: 1px solid rgba(0, 113, 227, 0.3) !important;
-    backdrop-filter: blur(10px);
-}
-
-.btn-glass-gold:hover {
-    background: rgba(0, 113, 227, 0.05) !important;
-    border-color: #0071e3 !important;
-    color: #0071e3 !important;
-}
+/* Button styles are in globals.css */
 
 /* Legacy overrides just in case */
 .btn-blue {
