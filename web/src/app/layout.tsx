@@ -27,11 +27,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  icons: {
-    icon: '/new_logo.png',
-    shortcut: '/new_logo.png',
-    apple: '/new_logo.png',
-  },
+
   manifest: '/site.webmanifest',
   openGraph: {
     title: "Nappy Garde",
