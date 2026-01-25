@@ -13,6 +13,12 @@ import Fireworks from "@/components/Fireworks";
 // Enterprise SEO Metadata
 export const metadata: Metadata = {
   metadataBase: new URL('https://nappygarde.lk'),
+  applicationName: 'Nappy Garde',
+  appleWebApp: {
+    capable: true,
+    title: 'Nappy Garde',
+    statusBarStyle: 'default',
+  },
   title: {
     default: "Nappy Garde",
     template: "%s | Nappy Garde"
@@ -106,6 +112,7 @@ const jsonLd = {
       "@id": "https://nappygarde.lk/#website",
       "url": "https://nappygarde.lk",
       "name": "Nappy Garde",
+      "alternateName": ["Nappy Garde Sri Lanka", "NappyGarde", "nappygarde.lk"],
       "description": "Premium Baby Diapers & Care Products",
       "publisher": {
         "@id": "https://nappygarde.lk/#organization"
